@@ -1,6 +1,7 @@
 package html
 
 import (
+	"fmt"
 	"github.com/go-on/lib/internal/shared"
 )
 
@@ -49,3 +50,20 @@ var Disabled_ = shared.Attribute{"disabled", "disabled"}
 var Required_ = shared.Attribute{"required", "required"}
 var MultiPart_ = Enctype_("multipart/form-data")
 var TargetBlank_ = Target_("_blank")
+
+func Attrs_(pairs ...string) []shared.Attribute {
+	l := len(pairs)
+	if l%2 != 0 {
+		panic("len pairs must be even")
+	}
+	a := make([]shared.Attribute, l/2)
+
+	for i := 0; i < l; i += 2 {
+		a[i/2] = shared.Attribute{pairs[i], pairs[i+1]}
+	}
+	return a
+}
+
+func Classf_(format string, i ...interface{}) shared.Class {
+	return shared.Class(fmt.Sprintf(format, i...))
+}
