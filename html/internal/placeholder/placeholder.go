@@ -5,19 +5,19 @@ import (
 	. "github.com/go-on/builtin"
 	"github.com/go-on/lib/internal/replacer"
 
-	. "github.com/go-on/lib/internal/shared"
+	// . "github.com/go-on/lib/internal/shared"
 
-	ph2 "github.com/go-on/lib/internal/shared/placeholder"
+	// ph2 "github.com/go-on/lib/internal/shared/placeholder"
 	ph "github.com/go-on/lib/internal/template/placeholder"
 	"html"
-	"net/http"
+	// "net/http"
 	"net/url"
 	"os"
 	"path/filepath"
 	// "reflect"
 	"runtime"
 	// "strings"
-	"time"
+	// "time"
 
 	"github.com/go-on/lib/internal/template"
 )
@@ -34,6 +34,7 @@ var Escaper = template.Escaper{
 	"urlparam": handleStrings(url.QueryEscape, false),
 }
 
+/*
 type view struct {
 	*template.View
 }
@@ -53,6 +54,7 @@ func (v *view) Placeholder(field string) placeholder {
 func View(stru interface{}, tag string) *view {
 	return &view{Escaper.View(stru, tag)}
 }
+*/
 
 //Placeholder("Link")
 
@@ -68,6 +70,7 @@ func units(format string) func(interface{}) string {
 	}
 }
 
+/*
 // takes different types and outputs a string
 func Str(in interface{}) string {
 	switch v := in.(type) {
@@ -82,6 +85,7 @@ func Str(in interface{}) string {
 	}
 	panic("unsupported type: " + fmt.Sprintf("%v (%T)", in, in))
 }
+*/
 
 func idem(in string) (out string) { return in }
 
@@ -127,6 +131,7 @@ type typedPlaceholder struct {
 	typ interface{}
 }
 
+/*
 func Handle(handler http.Handler) ph.PlaceholderHandler {
 	return ph.NewPlaceholderHandler(ph2.New(HTMLString(fmt.Sprintf("handle %v", time.Now().UnixNano()))), handler)
 }
@@ -134,6 +139,7 @@ func Handle(handler http.Handler) ph.PlaceholderHandler {
 func HandleFunc(fn func(http.ResponseWriter, *http.Request)) ph.PlaceholderHandler {
 	return ph.NewPlaceholderHandler(ph2.New(HTMLString(fmt.Sprintf("handlefunc %v", time.Now().UnixNano()))), http.HandlerFunc(fn))
 }
+*/
 
 /*
 func (tph typedPlaceholder) Handle(h http.Handler) ph.PlaceholderHandler {
