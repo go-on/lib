@@ -1,0 +1,16 @@
+{
+  "github.com/go-on/promise": {
+    "VCM": "git",
+    "Rev": "57dc5cac63713dd8d5feafe0d4eec1001c6bddcd",
+    "Parent": "github.com/go-on/ractive/0_4_0/ractive",
+    "Tag": "",
+    "RepoRoot": "github.com/go-on/promise"
+  },
+  "github.com/gopherjs/gopherjs/js": {
+    "VCM": "git",
+    "Rev": "59e5a84ac78d8d8320def25c8322c89daa8a0a2b",
+    "Parent": "github.com/go-on/ractive/0_4_0/ractive",
+    "Tag": "",
+    "RepoRoot": "github.com/gopherjs/gopherjs"
+  }
+}

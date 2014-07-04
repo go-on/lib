@@ -1,0 +1,12 @@
+{
+  "Exports": {
+    "New": "func (github.com/gopherjs/gopherjs/js.Object) Promise",
+    "Promise": "type Promise interface {Then((github.com/gopherjs/gopherjs/js.Object) github.com/gopherjs/gopherjs/js.Object,(github.com/gopherjs/gopherjs/js.Object) github.com/gopherjs/gopherjs/js.Object) Promise}",
+    "init": ""
+  },
+  "Imports": {
+    "github.com/gopherjs/gopherjs/js.Object": "type Object interface {Bool() bool; Call(string,...interface{}) Object; Delete(string); Float() float64; Get(string) Object; Index(int) Object; Int() int; Int64() int64; Interface() interface{}; Invoke(...interface{}) Object; IsNull() bool; IsUndefined() bool; Length() int; New(...interface{}) Object; Set(string,interface{}); SetIndex(int,interface{}); Str() string; Uint64() uint64; Unsafe() uintptr}",
+    "github.com/gopherjs/gopherjs/js.init": "6a229b30190531ea97c521e677fc98c9"
+  },
+  "Path": "github.com/go-on/promise"
+}
