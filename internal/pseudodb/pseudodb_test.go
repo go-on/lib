@@ -13,12 +13,30 @@ import (
 )
 
 type person struct {
+	Id                  string
 	FirstName, LastName string
 	Age                 int
 }
 
+func (p *person) SetUUID(id string) {
+	p.Id = id
+}
+
+func (p *person) UUID() string {
+	return p.Id
+}
+
 type company struct {
+	Id   string
 	Name string
+}
+
+func (c *company) SetUUID(id string) {
+	c.Id = id
+}
+
+func (c *company) UUID() string {
+	return c.Id
 }
 
 func TestTransformType(t *testing.T) {
@@ -30,9 +48,8 @@ func TestTransformType(t *testing.T) {
 }
 
 func TestGet(t *testing.T) {
-	peter := &person{"Peter", "Pan", 42}
-	app := NewApp(nil)
-	app.Register(&person{})
+	peter := &person{"", "Peter", "Pan", 42}
+	app := NewApp(nil, &person{})
 
 	app.Data["peter"] = peter
 
@@ -56,12 +73,10 @@ func TestGet(t *testing.T) {
 }
 
 func TestIndex(t *testing.T) {
-	peter := &person{"Peter", "Pan", 42}
-	petra := &person{"Petra", "Kelly", 102}
-	google := &company{"google"}
-	app := NewApp(nil)
-	app.Register(&person{})
-	app.Register(&company{})
+	peter := &person{"", "Peter", "Pan", 42}
+	petra := &person{"", "Petra", "Kelly", 102}
+	google := &company{"", "google"}
+	app := NewApp(nil, &person{}, &company{})
 
 	app.Data["peter"] = peter
 	app.Data["petra"] = petra
@@ -78,7 +93,7 @@ func TestIndex(t *testing.T) {
 
 	rt.ServeHTTP(rec, req)
 
-	persons := map[string]*person{}
+	persons := []person{}
 	// println(rec.Body.String())
 	err := json.Unmarshal(rec.Body.Bytes(), &persons)
 
@@ -90,13 +105,13 @@ func TestIndex(t *testing.T) {
 		t.Errorf("should be 2 persons, but are: %d", len(persons))
 	}
 
-	pete := persons["peter"]
+	pete := persons[0]
 
 	if pete.FirstName != "Peter" {
 		t.Errorf("wrong  persons['peter'].FirstName: expecting %s got %s", "Peter", pete.FirstName)
 	}
 
-	petr := persons["petra"]
+	petr := persons[1]
 
 	if petr.FirstName != "Petra" {
 		t.Errorf("wrong  persons['petra'].FirstName: expecting %s got %s", "Petra", petr.FirstName)
@@ -105,9 +120,8 @@ func TestIndex(t *testing.T) {
 }
 
 func TestPost(t *testing.T) {
-	peter := &person{"Peter", "Pan", 42}
-	app := NewApp(nil)
-	app.Register(&person{})
+	peter := &person{"", "Peter", "Pan", 42}
+	app := NewApp(nil, &person{})
 
 	rt := router.New()
 
@@ -138,12 +152,15 @@ func TestPost(t *testing.T) {
 		t.Errorf("wrong firstname: expected %#v, got: %#v", peter.FirstName, pete.(*person).FirstName)
 	}
 
+	if pete.(*person).Id != uuid {
+		t.Errorf("id not set")
+	}
+
 }
 
 func TestDelete(t *testing.T) {
-	peter := &person{"Peter", "Pan", 42}
-	app := NewApp(nil)
-	app.Register(&person{})
+	peter := &person{"peter", "Peter", "Pan", 42}
+	app := NewApp(nil, &person{})
 
 	app.Data["peter"] = peter
 
@@ -165,9 +182,8 @@ func TestDelete(t *testing.T) {
 }
 
 func TestPatch(t *testing.T) {
-	peter := &person{"Peter", "Pan", 42}
-	app := NewApp(nil)
-	app.Register(&person{})
+	peter := &person{"", "Peter", "Pan", 42}
+	app := NewApp(nil, &person{})
 
 	app.Data["peter"] = peter
 
@@ -175,7 +191,7 @@ func TestPatch(t *testing.T) {
 
 	app.Mount(rt, "/api")
 
-	pete := &person{"Peter", "Pan", 43}
+	pete := &person{"", "Peter", "Pan", 43}
 
 	peterJson, _ := json.Marshal(pete)
 
@@ -201,9 +217,8 @@ func TestFile(t *testing.T) {
 
 	file.Close()
 
-	peter := &person{"Peter", "Pan", 42}
-	app := NewApp(NewFileStore(file.Name()))
-	app.Register(&person{})
+	peter := &person{"", "Peter", "Pan", 42}
+	app := NewApp(NewFileStore(file.Name()), &person{})
 
 	rt := router.New()
 

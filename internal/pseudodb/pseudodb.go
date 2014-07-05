@@ -17,6 +17,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"reflect"
+	"sort"
 	"strings"
 	"sync"
 )
@@ -76,6 +77,11 @@ func (fs *FileStore) Load(a *App) error {
 	return json.Unmarshal(b, a)
 }
 
+type Storable interface {
+	SetUUID(string)
+	UUID() string
+}
+
 // TODO: create MarshalJSON and UnmarshalJSON methods that only save the data and the registry
 // TODO: check if the registry is compatible when loading, therefor we need to have the
 // registrants on NewApp call
@@ -91,13 +97,22 @@ type App struct {
 	Data          map[string]interface{}
 }
 
-func NewApp(store Store) *App {
-	return &App{
+// NewApp creates a new app, storing in store (if not nil).
+// types are pointers to instances of the types that should be
+// stored
+func NewApp(store Store, types ...Storable) *App {
+	a := &App{
 		RWMutex:  &sync.RWMutex{},
 		registry: map[string]reflect.Type{},
 		Data:     map[string]interface{}{},
 		store:    store,
 	}
+
+	for _, t := range types {
+		a.register(t)
+	}
+
+	return a
 }
 
 func _transformType(ty reflect.Type) string {
@@ -119,7 +134,7 @@ func transformType(ty reflect.Type) string {
 	return strings.ToLower(_transformType(ty))
 }
 
-func (a *App) Register(i interface{}) {
+func (a *App) register(i interface{}) {
 	ty := reflect.TypeOf(i)
 	if ty.Kind() != reflect.Ptr {
 		panic(fmt.Sprintf("%T is no pointer type", i))
@@ -139,14 +154,14 @@ func (a *App) Find(key string) (val interface{}, found bool) {
 }
 
 func (a *App) Mount(rt *router.Router, prefix string) {
-	a.GET = rt.GETFunc(prefix+"/:ressource/:uuid", a.get)
-	a.PATCH = rt.PATCHFunc(prefix+"/:ressource/:uuid", a.patch)
-	a.POST = rt.POSTFunc(prefix+"/:ressource/", a.post)
-	a.DELETE = rt.DELETEFunc(prefix+"/:ressource/:uuid", a.delete)
-	a.INDEX = rt.GETFunc(prefix+"/:ressource/", a.index)
+	a.GET = rt.GETFunc(prefix+"/:ressource/:uuid", a.getHandler)
+	a.PATCH = rt.PATCHFunc(prefix+"/:ressource/:uuid", a.patchHandler)
+	a.POST = rt.POSTFunc(prefix+"/:ressource/", a.postHandler)
+	a.DELETE = rt.DELETEFunc(prefix+"/:ressource/:uuid", a.deleteHandler)
+	a.INDEX = rt.GETFunc(prefix+"/:ressource/", a.indexHandler)
 }
 
-func (a *App) get(rw http.ResponseWriter, req *http.Request) {
+func (a *App) getHandler(rw http.ResponseWriter, req *http.Request) {
 	ressource := router.GetRouteParam(req, "ressource")
 	uuid := router.GetRouteParam(req, "uuid")
 
@@ -199,7 +214,7 @@ func filterByType(ty reflect.Type, m map[string]interface{}) map[string]interfac
 	return res
 }
 
-func (a *App) patch(rw http.ResponseWriter, req *http.Request) {
+func (a *App) patchHandler(rw http.ResponseWriter, req *http.Request) {
 	// println("patch called")
 	ressource := router.GetRouteParam(req, "ressource")
 	uuid := router.GetRouteParam(req, "uuid")
@@ -242,9 +257,7 @@ func (a *App) patch(rw http.ResponseWriter, req *http.Request) {
 		rw.Write([]byte(err.Error()))
 	}
 
-	a.Lock()
-	defer a.Unlock()
-	a.Data[uuid] = val
+	a.Update(val.(Storable))
 
 	if a.store != nil {
 
@@ -259,7 +272,21 @@ func (a *App) patch(rw http.ResponseWriter, req *http.Request) {
 	rw.Write([]byte("ok"))
 }
 
-func (a *App) post(rw http.ResponseWriter, req *http.Request) {
+func (a *App) verifyRegistration(val Storable) {
+	_, ok := a.registry[transformType(reflect.TypeOf(val))]
+	if !ok {
+		panic("not in registry: " + reflect.TypeOf(val).String())
+	}
+}
+
+func (a *App) Update(val Storable) {
+	a.verifyRegistration(val)
+	a.Lock()
+	defer a.Unlock()
+	a.Data[val.UUID()] = val
+}
+
+func (a *App) postHandler(rw http.ResponseWriter, req *http.Request) {
 	ressource := router.GetRouteParam(req, "ressource")
 
 	if ressource == "" {
@@ -276,13 +303,13 @@ func (a *App) post(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	val := reflect.New(ty.Elem()).Interface()
-
 	body, err := ioutil.ReadAll(req.Body)
 	if err != nil {
 		rw.WriteHeader(http.StatusInternalServerError)
 		rw.Write([]byte(err.Error()))
 	}
+
+	val := reflect.New(ty.Elem()).Interface()
 
 	err = json.Unmarshal(body, val)
 	if err != nil {
@@ -290,10 +317,7 @@ func (a *App) post(rw http.ResponseWriter, req *http.Request) {
 		rw.Write([]byte(err.Error()))
 	}
 
-	a.Lock()
-	defer a.Unlock()
-	_uuid := uuid.NewV1().String()
-	a.Data[_uuid] = val
+	_uuid := a.New(val.(Storable))
 
 	if a.store != nil {
 
@@ -310,7 +334,20 @@ func (a *App) post(rw http.ResponseWriter, req *http.Request) {
 	rw.Write([]byte(_uuid))
 }
 
-func (a *App) delete(rw http.ResponseWriter, req *http.Request) {
+func (a *App) New(val Storable) (uuid_ string) {
+	_, ok := a.registry[transformType(reflect.TypeOf(val))]
+	if !ok {
+		panic("not in registry: " + reflect.TypeOf(val).String())
+	}
+	a.Lock()
+	defer a.Unlock()
+	_uuid := uuid.NewV1().String()
+	val.SetUUID(_uuid)
+	a.Data[_uuid] = val
+	return _uuid
+}
+
+func (a *App) deleteHandler(rw http.ResponseWriter, req *http.Request) {
 	ressource := router.GetRouteParam(req, "ressource")
 	uuid := router.GetRouteParam(req, "uuid")
 
@@ -340,9 +377,8 @@ func (a *App) delete(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	a.Lock()
-	defer a.Unlock()
-	delete(a.Data, uuid)
+	a.Delete(val.(Storable))
+
 	if a.store != nil {
 
 		err := a.store.Save(a)
@@ -357,7 +393,24 @@ func (a *App) delete(rw http.ResponseWriter, req *http.Request) {
 	rw.Write([]byte("ok"))
 }
 
-func (a *App) index(rw http.ResponseWriter, req *http.Request) {
+func (a *App) Delete(val Storable) {
+	a.Lock()
+	defer a.Unlock()
+	delete(a.Data, val.UUID())
+}
+
+// List returns the current list for the given pointer to type instance
+func (a *App) List(val Storable) map[string]interface{} {
+	a.verifyRegistration(val)
+	return a.list(reflect.TypeOf(val))
+}
+func (a *App) list(ty reflect.Type) map[string]interface{} {
+	a.RLock()
+	defer a.RUnlock()
+	return filterByType(ty, a.Data)
+}
+
+func (a *App) indexHandler(rw http.ResponseWriter, req *http.Request) {
 	ressource := router.GetRouteParam(req, "ressource")
 
 	if ressource == "" {
@@ -374,9 +427,21 @@ func (a *App) index(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	a.RLock()
-	defer a.RUnlock()
-	data := filterByType(ty, a.Data)
+	list := a.list(ty)
+
+	uuids := []string{}
+
+	for k := range list {
+		uuids = append(uuids, k)
+	}
+
+	sort.Strings(uuids)
+
+	data := make([]interface{}, len(uuids))
+
+	for i, ui := range uuids {
+		data[i] = list[ui]
+	}
 
 	b, err := json.Marshal(data)
 
