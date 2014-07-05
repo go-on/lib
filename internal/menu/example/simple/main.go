@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/go-on/html"
-	"github.com/go-on/menu"
-	"github.com/go-on/menu/menuhtml"
+	"github.com/go-on/lib/internal/menu"
+	"github.com/go-on/lib/internal/menu/menuhtml"
+	"github.com/go-on/lib/internal/shared"
 	"os"
 )
 
@@ -34,7 +34,7 @@ func main() {
 		},
 	}
 
-	ul := menuhtml.NewUL(html.Class("menu-open"), html.Class("menu-active"), html.Class("menu-sub"))
+	ul := menuhtml.NewUL(shared.Class("menu-open"), shared.Class("menu-active"), shared.Class("menu-sub"))
 
 	// allows to mount a menu that was made in a different way
 	subA := m.FindByPath("$sub_a")
