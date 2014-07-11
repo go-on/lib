@@ -33,7 +33,7 @@ var tests = map[string]string{
 						    </body>
 						   </html>`: `NewDocType("<!DOCTYPE-html>",HTML(Attrs("lang","de"),HEAD(),BODY(Class("main"),),),)`,
 
-	`<meta http-equiv="X-UA-Compatible" content="IE=edge">`: `META(Attrs("http-equiv","X-UA-Compatible","content","IE=edge"),)`,
+	`<meta http-equiv="X-UA-Compatible">`: `META(Attrs("http-equiv","X-UA-Compatible"),)`,
 }
 
 var p = Parser{TrimSpace: true, StripPrefixes: true}
