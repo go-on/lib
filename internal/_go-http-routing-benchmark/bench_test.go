@@ -262,7 +262,7 @@ func loadGoon(routes []route) *goon.Router {
 			panic("Unknow HTTP method: " + route.method)
 		}
 	}
-	router.MustMount("/", http.NewServeMux())
+	router.MustMount("/", nil)
 	//goon.MustMount("/", router)
 	return router
 }
@@ -333,7 +333,7 @@ func BenchmarkTraffic_Param(b *testing.B) {
 func BenchmarkGoon_Param(b *testing.B) {
 	router := goon.New()
 	router.GET("/user/:name", http.HandlerFunc(goonHandler))
-	router.MustMount("/", http.NewServeMux())
+	router.MustMount("/", nil)
 	// goon.MustMount("/", router)
 
 	r, _ := http.NewRequest("GET", "/user/gordon", nil)
@@ -395,7 +395,7 @@ func BenchmarkTraffic_ParamWrite(b *testing.B) {
 func BenchmarkGoon_ParamWrite(b *testing.B) {
 	router := goon.New()
 	router.GET("/user/:name", http.HandlerFunc(goonHandlerWrite))
-	router.MustMount("/", http.NewServeMux())
+	router.MustMount("/", nil)
 	// goon.MustMount("/", router)
 
 	r, _ := http.NewRequest("GET", "/user/gordon", nil)
