@@ -11,15 +11,16 @@ package pseudodb
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/go-contrib/uuid"
-	"github.com/go-on/router"
-	"github.com/go-on/router/route"
 	"io/ioutil"
 	"net/http"
 	"reflect"
 	"sort"
 	"strings"
 	"sync"
+
+	"github.com/go-contrib/uuid"
+	"github.com/go-on/router"
+	"github.com/go-on/router/route"
 )
 
 /*
@@ -82,11 +83,9 @@ type Storable interface {
 	UUID() string
 }
 
-// TODO: create MarshalJSON and UnmarshalJSON methods that only save the data and the registry
-// TODO: check if the registry is compatible when loading, therefor we need to have the
-// registrants on NewApp call
 type App struct {
 	*sync.RWMutex `json:"-"`
+	typeDeps      []string
 	registry      map[string]reflect.Type
 	GET           *route.Route `json:"-"`
 	PATCH         *route.Route `json:"-"`
@@ -95,11 +94,68 @@ type App struct {
 	INDEX         *route.Route `json:"-"`
 	store         Store        `json:"-"`
 	Data          map[string]interface{}
+	BeforeDelete  func(interface{}) error `json:"-"`
+}
+
+type objectWithType struct {
+	Object interface{}
+	Type   string
+}
+
+func (a *App) MarshalJSON() ([]byte, error) {
+	data := map[string]objectWithType{}
+
+	for k, v := range a.Data {
+		data[k] = objectWithType{
+			Object: v,
+			Type:   transformType(reflect.TypeOf(v)),
+		}
+	}
+
+	return json.Marshal(data)
+}
+
+func (a *App) UnmarshalJSON(by []byte) error {
+	data := map[string]objectWithType{}
+	err := json.Unmarshal(by, &data)
+
+	if err != nil {
+		return err
+	}
+
+	for _, currentty := range a.typeDeps {
+		for k, v := range data {
+			ty, found := a.registry[v.Type]
+			if !found {
+				return fmt.Errorf("can't find type %#v in registry", v.Type)
+			}
+
+			if v.Type != currentty {
+				continue
+			}
+			val := reflect.New(ty.Elem()).Interface()
+			js, errJs := json.Marshal(v.Object)
+			if errJs != nil {
+				return errJs
+			}
+
+			errJs = json.Unmarshal(js, val)
+			if errJs != nil {
+				return errJs
+			}
+
+			a.Data[k] = val
+		}
+	}
+	return nil
 }
 
 // NewApp creates a new app, storing in store (if not nil).
 // types are pointers to instances of the types that should be
 // stored
+// the types must be in the order of their dependencies, i.e.
+// non dependant types come first. this is important when reloading
+// the data from the store
 func NewApp(store Store, types ...Storable) *App {
 	a := &App{
 		RWMutex:  &sync.RWMutex{},
@@ -142,7 +198,7 @@ func (a *App) register(i interface{}) {
 
 	a.Lock()
 	defer a.Unlock()
-
+	a.typeDeps = append(a.typeDeps, transformType(ty))
 	a.registry[transformType(ty)] = ty
 }
 
@@ -215,7 +271,6 @@ func filterByType(ty reflect.Type, m map[string]interface{}) map[string]interfac
 }
 
 func (a *App) patchHandler(rw http.ResponseWriter, req *http.Request) {
-	// println("patch called")
 	ressource := router.GetRouteParam(req, "ressource")
 	uuid := router.GetRouteParam(req, "uuid")
 
@@ -265,7 +320,7 @@ func (a *App) patchHandler(rw http.ResponseWriter, req *http.Request) {
 
 		if err != nil {
 			rw.WriteHeader(http.StatusInternalServerError)
-			rw.Write([]byte("could not save"))
+			rw.Write([]byte("could not save: " + err.Error()))
 			return
 		}
 	}
@@ -325,7 +380,7 @@ func (a *App) postHandler(rw http.ResponseWriter, req *http.Request) {
 
 		if err != nil {
 			rw.WriteHeader(http.StatusInternalServerError)
-			rw.Write([]byte("could not save"))
+			rw.Write([]byte("could not save: " + err.Error()))
 			return
 		}
 	}
@@ -377,6 +432,17 @@ func (a *App) deleteHandler(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	var err error
+
+	if a.BeforeDelete != nil {
+		err = a.BeforeDelete(val)
+		if err != nil {
+			rw.WriteHeader(http.StatusInternalServerError)
+			rw.Write([]byte(err.Error()))
+			return
+		}
+	}
+
 	a.Delete(val.(Storable))
 
 	if a.store != nil {
@@ -385,7 +451,7 @@ func (a *App) deleteHandler(rw http.ResponseWriter, req *http.Request) {
 
 		if err != nil {
 			rw.WriteHeader(http.StatusInternalServerError)
-			rw.Write([]byte("could not save"))
+			rw.Write([]byte("could not save: " + err.Error()))
 			return
 		}
 	}

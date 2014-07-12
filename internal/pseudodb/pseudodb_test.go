@@ -3,13 +3,14 @@ package pseudodb
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/go-on/router"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"reflect"
 	"testing"
+
+	"github.com/go-on/router"
 )
 
 type person struct {
@@ -239,7 +240,7 @@ func TestFile(t *testing.T) {
 
 	// fmt.Printf("%s\n", d)
 
-	var app2 = NewApp(NewFileStore(file.Name()))
+	var app2 = NewApp(NewFileStore(file.Name()), &person{})
 	err = app2.Load()
 
 	if err != nil {
