@@ -262,12 +262,19 @@ func (r *Ractive) OffAll(event string) {
 	r.obj.Get("off").Invoke(event)
 }
 
-func (r *Ractive) On(event string, fn func(o js.Object, eventData js.Object) interface{}) (l *Listener) {
+func (r *Ractive) On(event string, fn func(o js.Object, eventData js.Object)) (l *Listener) {
 	o := r.obj.Get("on").Invoke(event, fn)
 	return &Listener{o}
 }
 
-func (r *Ractive) OnMap(m map[string]func(o js.Object, eventData js.Object) interface{}) (l *Listener) {
+func (r *Ractive) OnFire(event string, triggerEvent string) (l *Listener) {
+	o := r.obj.Get("on").Invoke(event, func(ev js.Object, eventData js.Object) {
+		r.Fire(triggerEvent, eventData)
+	})
+	return &Listener{o}
+}
+
+func (r *Ractive) OnMap(m map[string]func(o js.Object, eventData js.Object)) (l *Listener) {
 	o := r.obj.Get("on").Invoke(m)
 	return &Listener{o}
 }
