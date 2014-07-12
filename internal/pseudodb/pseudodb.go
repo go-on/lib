@@ -18,7 +18,11 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/go-on/lib/internal/pseudodb/pseudoroutes"
+	"github.com/go-on/method"
+
 	"github.com/go-contrib/uuid"
+	// "github.com/go-on/router"
 	"github.com/go-on/router"
 	"github.com/go-on/router/route"
 )
@@ -33,6 +37,8 @@ An App offers the following:
 - store id outside of the data
 - restroutes
 
+This package is meant to be included only once per process, since the routes are shared and come from
+github.com/go-on/lib/internal/pseudodb/pseudoroutes.
 */
 
 var _ = uuid.DomainGroup
@@ -209,12 +215,17 @@ func (a *App) Find(key string) (val interface{}, found bool) {
 	return
 }
 
-func (a *App) Mount(rt *router.Router, prefix string) {
-	a.GET = rt.GETFunc(prefix+"/:ressource/:uuid", a.getHandler)
-	a.PATCH = rt.PATCHFunc(prefix+"/:ressource/:uuid", a.patchHandler)
-	a.POST = rt.POSTFunc(prefix+"/:ressource/", a.postHandler)
-	a.DELETE = rt.DELETEFunc(prefix+"/:ressource/:uuid", a.deleteHandler)
-	a.INDEX = rt.GETFunc(prefix+"/:ressource/", a.indexHandler)
+func (a *App) RegisterRoutes(rt *router.Router) {
+	rt.MustRegisterRoute(pseudoroutes.GET, method.GET, http.HandlerFunc(a.getHandler))
+	rt.MustRegisterRoute(pseudoroutes.PATCH, method.PATCH, http.HandlerFunc(a.patchHandler))
+	rt.MustRegisterRoute(pseudoroutes.POST, method.POST, http.HandlerFunc(a.postHandler))
+	rt.MustRegisterRoute(pseudoroutes.DELETE, method.DELETE, http.HandlerFunc(a.deleteHandler))
+	rt.MustRegisterRoute(pseudoroutes.INDEX, method.GET, http.HandlerFunc(a.indexHandler))
+	// a.GET = rt.GETFunc(prefix+"/:ressource/:uuid", a.getHandler)
+	// a.PATCH = rt.PATCHFunc(prefix+"/:ressource/:uuid", a.patchHandler)
+	// a.POST = rt.POSTFunc(prefix+"/:ressource/", a.postHandler)
+	// a.DELETE = rt.DELETEFunc(prefix+"/:ressource/:uuid", a.deleteHandler)
+	// a.INDEX = rt.GETFunc(prefix+"/:ressource/", a.indexHandler)
 }
 
 func (a *App) getHandler(rw http.ResponseWriter, req *http.Request) {
