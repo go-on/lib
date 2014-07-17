@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
+
 	. "github.com/go-on/lib/html"
 	. "github.com/go-on/lib/html/internal/element"
 	"github.com/go-on/lib/html/internal/element/compiler"
 	. "github.com/go-on/lib/html/internal/htmlfat"
 	"github.com/go-on/lib/internal/shared"
 	"github.com/go-on/router"
+	. "github.com/go-on/router/internal/routerfat"
 	"github.com/go-on/router/route"
-	. "github.com/go-on/router/routerfat"
 	"github.com/go-on/wrap"
 	"github.com/go-on/wrap-contrib-testing/wrapstesting"
 	// . "github.com/go-on/wrap-contrib/wraps"
@@ -108,7 +109,7 @@ var (
 )
 
 func listLink(rw http.ResponseWriter, req *http.Request) {
-	DIV(AHref(router.MustURL(personList), "back to list")).WriteTo(rw)
+	DIV(AHref(personList.MustURL(), "back to list")).WriteTo(rw)
 }
 
 func main() {
@@ -128,7 +129,7 @@ func main() {
 
 	personList = personRouter.GET("/", UL(ListView))
 
-	router.Mount("/person", personRouter)
+	personRouter.Mount("/person", http.DefaultServeMux)
 
 	handler := compiler.DocHandler(HTML5(HTML(BODY(personRouter))))
 

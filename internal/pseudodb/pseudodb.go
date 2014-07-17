@@ -19,7 +19,6 @@ import (
 	"sync"
 
 	"github.com/go-on/lib/internal/pseudodb/pseudoroutes"
-	"github.com/go-on/method"
 
 	"github.com/go-contrib/uuid"
 	// "github.com/go-on/router"
@@ -63,7 +62,7 @@ func NewFileStore(filename string) Store {
 func (fs *FileStore) Save(a *App) error {
 	fs.Mutex.Lock()
 	defer fs.Mutex.Unlock()
-	b, err := json.Marshal(a)
+	b, err := json.MarshalIndent(a, "", "  ")
 
 	if err != nil {
 		return err
@@ -216,16 +215,18 @@ func (a *App) Find(key string) (val interface{}, found bool) {
 }
 
 func (a *App) RegisterRoutes(rt *router.Router) {
-	rt.MustRegisterRoute(pseudoroutes.GET, method.GET, http.HandlerFunc(a.getHandler))
-	rt.MustRegisterRoute(pseudoroutes.PATCH, method.PATCH, http.HandlerFunc(a.patchHandler))
-	rt.MustRegisterRoute(pseudoroutes.POST, method.POST, http.HandlerFunc(a.postHandler))
-	rt.MustRegisterRoute(pseudoroutes.DELETE, method.DELETE, http.HandlerFunc(a.deleteHandler))
-	rt.MustRegisterRoute(pseudoroutes.INDEX, method.GET, http.HandlerFunc(a.indexHandler))
-	// a.GET = rt.GETFunc(prefix+"/:ressource/:uuid", a.getHandler)
-	// a.PATCH = rt.PATCHFunc(prefix+"/:ressource/:uuid", a.patchHandler)
-	// a.POST = rt.POSTFunc(prefix+"/:ressource/", a.postHandler)
-	// a.DELETE = rt.DELETEFunc(prefix+"/:ressource/:uuid", a.deleteHandler)
-	// a.INDEX = rt.GETFunc(prefix+"/:ressource/", a.indexHandler)
+	pseudoroutes.GET.GETHandler = http.HandlerFunc(a.getHandler)
+	pseudoroutes.PATCH.PATCHHandler = http.HandlerFunc(a.patchHandler)
+	pseudoroutes.POST.POSTHandler = http.HandlerFunc(a.postHandler)
+	pseudoroutes.DELETE.DELETEHandler = http.HandlerFunc(a.deleteHandler)
+	pseudoroutes.INDEX.GETHandler = http.HandlerFunc(a.indexHandler)
+	rt.AddRoute(pseudoroutes.GET)
+	rt.AddRoute(pseudoroutes.INDEX)
+	// rt.MustRegisterRoute(pseudoroutes.PATCH, method.PATCH, http.HandlerFunc(a.patchHandler))
+
+	// rt.MustRegisterRoute(pseudoroutes.POST, method.POST, http.HandlerFunc(a.postHandler))
+	// rt.MustRegisterRoute(pseudoroutes.DELETE, method.DELETE, http.HandlerFunc(a.deleteHandler))
+	// rt.MustRegisterRoute(pseudoroutes.INDEX, method.GET, http.HandlerFunc(a.indexHandler))
 }
 
 func (a *App) getHandler(rw http.ResponseWriter, req *http.Request) {

@@ -5,6 +5,12 @@
 package benchmark
 
 import (
+	"io"
+	"log"
+	"net/http"
+	"regexp"
+	"testing"
+
 	"github.com/bmizerany/pat"
 	"github.com/codegangsta/martini"
 	goon "github.com/go-on/router"
@@ -13,11 +19,6 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/pilu/traffic"
 	"github.com/rcrowley/go-tigertonic"
-	"io"
-	"log"
-	"net/http"
-	"regexp"
-	"testing"
 )
 
 type route struct {
@@ -239,7 +240,7 @@ func loadTraffic(routes []route) *traffic.Router {
 
 // go-on/router
 func goonHandlerWrite(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, r.FormValue(":name"))
+	io.WriteString(w, goon.GetRouteParam(r, "name"))
 }
 
 func goonHandler(w http.ResponseWriter, r *http.Request) {}
@@ -249,21 +250,20 @@ func loadGoon(routes []route) *goon.Router {
 	for _, route := range routes {
 		switch route.method {
 		case "GET":
-			router.GET(route.path, http.HandlerFunc(goonHandler))
+			router.GETFunc(route.path, goonHandler)
 		case "POST":
-			router.POST(route.path, http.HandlerFunc(goonHandler))
+			router.POSTFunc(route.path, goonHandler)
 		case "PUT":
-			router.PUT(route.path, http.HandlerFunc(goonHandler))
+			router.PUTFunc(route.path, goonHandler)
 		case "PATCH":
-			router.PATCH(route.path, http.HandlerFunc(goonHandler))
+			router.PATCHFunc(route.path, goonHandler)
 		case "DELETE":
-			router.DELETE(route.path, http.HandlerFunc(goonHandler))
+			router.DELETEFunc(route.path, goonHandler)
 		default:
 			panic("Unknow HTTP method: " + route.method)
 		}
 	}
-	router.MustMount("/", nil)
-	//goon.MustMount("/", router)
+	router.Mount("/", nil)
 	return router
 }
 
@@ -332,9 +332,8 @@ func BenchmarkTraffic_Param(b *testing.B) {
 }
 func BenchmarkGoon_Param(b *testing.B) {
 	router := goon.New()
-	router.GET("/user/:name", http.HandlerFunc(goonHandler))
-	router.MustMount("/", nil)
-	// goon.MustMount("/", router)
+	router.GETFunc("/user/:name", goonHandler)
+	router.Mount("/", nil)
 
 	r, _ := http.NewRequest("GET", "/user/gordon", nil)
 	benchRequest(b, router, r)
@@ -395,8 +394,7 @@ func BenchmarkTraffic_ParamWrite(b *testing.B) {
 func BenchmarkGoon_ParamWrite(b *testing.B) {
 	router := goon.New()
 	router.GET("/user/:name", http.HandlerFunc(goonHandlerWrite))
-	router.MustMount("/", nil)
-	// goon.MustMount("/", router)
+	router.Mount("/", nil)
 
 	r, _ := http.NewRequest("GET", "/user/gordon", nil)
 	benchRequest(b, router, r)

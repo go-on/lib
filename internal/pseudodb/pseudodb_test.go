@@ -54,14 +54,13 @@ func TestGet(t *testing.T) {
 
 	app.Data["peter"] = peter
 
-	rt := router.New()
-
-	app.Mount(rt, "/api")
-
 	rec := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/v2/api/person/peter", nil)
+	req, _ := http.NewRequest("GET", "/person/peter", nil)
 
-	router.Mount("/v2", rt)
+	rt := router.New()
+	app.RegisterRoutes(rt)
+	rt.Mount("/", nil)
+	// router.Mount("/v2", rt)
 
 	rt.ServeHTTP(rec, req)
 
@@ -83,14 +82,17 @@ func TestIndex(t *testing.T) {
 	app.Data["petra"] = petra
 	app.Data["google"] = google
 
-	rt := router.New()
+	// rt := router.New()
 
-	app.Mount(rt, "/api")
+	// app.Mount(rt, "/api")
 
 	rec := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/v1/api/person/", nil)
+	req, _ := http.NewRequest("GET", "/person/", nil)
 
-	router.Mount("/v1", rt)
+	rt := router.New()
+	app.RegisterRoutes(rt)
+	rt.Mount("/", nil)
+	// router.Mount("/v1", rt)
 
 	rt.ServeHTTP(rec, req)
 
@@ -124,16 +126,19 @@ func TestPost(t *testing.T) {
 	peter := &person{"", "Peter", "Pan", 42}
 	app := NewApp(nil, &person{})
 
-	rt := router.New()
+	// rt := router.New()
 
-	app.Mount(rt, "/api")
+	// app.Mount(rt, "/api")
 
 	peterJson, _ := json.Marshal(peter)
 
 	rec := httptest.NewRecorder()
-	req, _ := http.NewRequest("POST", "/v3/api/person/", bytes.NewReader(peterJson))
+	req, _ := http.NewRequest("POST", "/person/", bytes.NewReader(peterJson))
 
-	router.Mount("/v3", rt)
+	rt := router.New()
+	app.RegisterRoutes(rt)
+	rt.Mount("/", nil)
+	// router.Mount("/v3", rt)
 
 	rt.ServeHTTP(rec, req)
 
@@ -165,14 +170,17 @@ func TestDelete(t *testing.T) {
 
 	app.Data["peter"] = peter
 
-	rt := router.New()
+	// rt := router.New()
 
-	app.Mount(rt, "/api")
+	// app.Mount(rt, "/api")
 
 	rec := httptest.NewRecorder()
-	req, _ := http.NewRequest("DELETE", "/v4/api/person/peter", nil)
+	req, _ := http.NewRequest("DELETE", "/person/peter", nil)
 
-	router.Mount("/v4", rt)
+	// router.Mount("/v4", rt)
+	rt := router.New()
+	app.RegisterRoutes(rt)
+	rt.Mount("/", nil)
 
 	rt.ServeHTTP(rec, req)
 
@@ -188,18 +196,21 @@ func TestPatch(t *testing.T) {
 
 	app.Data["peter"] = peter
 
-	rt := router.New()
+	// rt := router.New()
 
-	app.Mount(rt, "/api")
+	// app.Mount(rt, "/api")
 
 	pete := &person{"", "Peter", "Pan", 43}
 
 	peterJson, _ := json.Marshal(pete)
 
 	rec := httptest.NewRecorder()
-	req, _ := http.NewRequest("PATCH", "/v5/api/person/peter", bytes.NewReader(peterJson))
+	req, _ := http.NewRequest("PATCH", "/person/peter", bytes.NewReader(peterJson))
 
-	router.Mount("/v5", rt)
+	// router.Mount("/v5", rt)
+	rt := router.New()
+	app.RegisterRoutes(rt)
+	rt.Mount("/", nil)
 
 	rt.ServeHTTP(rec, req)
 
@@ -221,17 +232,19 @@ func TestFile(t *testing.T) {
 	peter := &person{"", "Peter", "Pan", 42}
 	app := NewApp(NewFileStore(file.Name()), &person{})
 
-	rt := router.New()
+	// rt := router.New()
 
-	app.Mount(rt, "/api")
+	// app.Mount(rt, "/api")
 
 	peterJson, _ := json.Marshal(peter)
 
 	rec := httptest.NewRecorder()
-	req, _ := http.NewRequest("POST", "/v6/api/person/", bytes.NewReader(peterJson))
+	req, _ := http.NewRequest("POST", "/person/", bytes.NewReader(peterJson))
 
-	router.Mount("/v6", rt)
-
+	// router.Mount("/v6", rt)
+	rt := router.New()
+	app.RegisterRoutes(rt)
+	rt.Mount("/", nil)
 	rt.ServeHTTP(rec, req)
 
 	if rec.Code != http.StatusCreated {

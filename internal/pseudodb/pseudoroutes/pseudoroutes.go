@@ -1,18 +1,29 @@
 package pseudoroutes
 
-import (
-	"github.com/go-on/method"
+import "github.com/go-on/router/route"
 
-	"github.com/go-on/router/route"
-)
+type mountpath string
+
+func (mp mountpath) MountPath() string {
+	return string(mp)
+}
 
 var (
-	item   = route.NewRoute("/:ressource/:uuid")
-	GET    = item.AddMethod(method.GET)
-	PATCH  = item.AddMethod(method.PATCH)
-	DELETE = item.AddMethod(method.DELETE)
+	item   = route.New("/:ressource/:uuid")
+	GET    = item
+	PATCH  = item
+	DELETE = item
 
-	list  = route.NewRoute("/:ressource/")
-	POST  = list.AddMethod(method.POST)
-	INDEX = list.AddMethod(method.GET)
+	list  = route.New("/:ressource/")
+	POST  = list
+	INDEX = list
 )
+
+func Mount(mountpoint string) {
+	mp := mountpath(mountpoint)
+	GET.Router = mp
+	POST.Router = mp
+	PATCH.Router = mp
+	DELETE.Router = mp
+	INDEX.Router = mp
+}
