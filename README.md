@@ -3,4 +3,4 @@ lib
 
 libraries that are part of go-on
 
-[![Build Status](https://secure.travis-ci.org/go-on/lib.png)](http://travis-ci.org/go-on/lib) ![Project status](http://img.shields.io/status/alpha.png?color=red)
+[![Build Status](https://drone.io/github.com/go-on/lib/status.png)](https://drone.io/github.com/go-on/lib/latest) ![Project status](http://img.shields.io/status/alpha.png?color=red)
