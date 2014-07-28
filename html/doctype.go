@@ -3,12 +3,13 @@ package html
 import (
 	"bytes"
 	"fmt"
+	"io"
+	"net/http"
+
 	. "github.com/go-on/lib/html/internal/element"
 	"github.com/go-on/lib/internal/shared"
 	"github.com/go-on/lib/internal/template"
-	"github.com/go-on/wrap-contrib/helper"
-	"io"
-	"net/http"
+	"github.com/go-on/wrap"
 )
 
 // pseudo element for placeholder
@@ -69,17 +70,17 @@ func (ø *DocType) Tag() string {
 var _ ElementLike = &DocType{}
 
 func (ø *DocType) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	inner := helper.NewResponseBuffer(w)
+	inner := wrap.NewRWBuffer(w)
 	ø.Element.ServeHTTP(inner, r)
 	switch inner.Code {
 	case 302, 301:
-		inner.WriteHeadersTo(w)
-		inner.WriteCodeTo(w)
+		inner.FlushHeaders()
+		inner.FlushCode()
 		// stop
 		return
 	}
 	fmt.Fprint(w, ø.DocType+"\n")
-	inner.WriteAllTo(w)
+	inner.FlushAll()
 }
 
 func (ø *DocType) Template() *template.Template {

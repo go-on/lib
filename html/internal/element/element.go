@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/go-on/wrap"
+
 	"github.com/go-on/builtin"
 	"github.com/go-on/lib/internal/shared"
 	"github.com/go-on/lib/internal/shared/placeholder"
 	"github.com/go-on/lib/internal/template"
-	"github.com/go-on/wrap-contrib/helper"
+
 	// "github.com/go-on/replacer"
 
 	"net/http"
@@ -258,17 +260,17 @@ func (ø *Element) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		inner := serveInner(ø, w, r)
 		switch inner.Code {
 		case 302, 301:
-			inner.WriteHeadersTo(w)
-			inner.WriteCodeTo(w)
+			inner.FlushHeaders()
+			inner.FlushCode()
 			// stop
 			return
 		}
 		if inner.HasChanged() {
 			if len(inner.Header()) > 0 {
-				inner.WriteHeadersTo(w)
+				inner.FlushHeaders()
 			}
 			if inner.Code != 0 {
-				inner.WriteCodeTo(w)
+				inner.FlushCode()
 			}
 			Pre(ø, w)
 			inner.Buffer.WriteTo(w)
@@ -280,28 +282,28 @@ func (ø *Element) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	Post(ø, w)
 }
 
-func serveInner(ø *Element, w http.ResponseWriter, r *http.Request) (outer *helper.ResponseBuffer) {
-	outer = helper.NewResponseBuffer(w)
+func serveInner(ø *Element, w http.ResponseWriter, r *http.Request) (outer *wrap.RWBuffer) {
+	outer = wrap.NewRWBuffer(w)
 	for _, in := range ø.Children {
 
 		switch ch := in.(type) {
 		//case *Element:
 		case http.Handler:
-			buf := helper.NewResponseBuffer(outer)
+			buf := wrap.NewRWBuffer(outer)
 			ch.ServeHTTP(buf, r)
 
 			switch buf.Code {
 			case 302, 301:
-				buf.WriteHeadersTo(outer)
-				buf.WriteCodeTo(outer)
+				buf.FlushHeaders()
+				buf.FlushCode()
 				return
 			case 404:
-				buf.WriteAllTo(outer)
+				buf.FlushAll()
 			case 500:
 				fmt.Fprint(outer, "Server Error")
 			default:
 				if buf.IsOk() {
-					buf.WriteAllTo(outer)
+					buf.FlushAll()
 				}
 			}
 		case io.WriterTo:

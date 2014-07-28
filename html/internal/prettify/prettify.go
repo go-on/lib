@@ -8,7 +8,7 @@ import (
 	"strings"
 	"text/scanner"
 
-	"github.com/go-on/wrap-contrib/helper"
+	"github.com/go-on/wrap"
 )
 
 type xmlScanner struct {
@@ -83,11 +83,11 @@ var Wrap = wrapper{}
 func (wr wrapper) Wrap(next http.Handler) http.Handler {
 	return http.HandlerFunc(
 		func(rw http.ResponseWriter, req *http.Request) {
-			buf := helper.NewResponseBuffer(rw)
+			buf := wrap.NewRWBuffer(rw)
 			next.ServeHTTP(buf, req)
 			pretty := Prettify(buf.BodyString())
-			buf.WriteHeadersTo(rw)
-			buf.WriteCodeTo(rw)
+			buf.FlushHeaders()
+			buf.FlushCode()
 			fmt.Fprint(rw, pretty)
 		},
 	)

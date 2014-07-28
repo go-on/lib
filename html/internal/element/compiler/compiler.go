@@ -2,13 +2,14 @@ package compiler
 
 import (
 	"bytes"
-	ht "github.com/go-on/lib/html"
-	"github.com/go-on/lib/html/internal/element"
-	"github.com/go-on/lib/internal/replacer"
-	"github.com/go-on/wrap-contrib/helper"
 	"net/http"
 	"reflect"
 	"strings"
+
+	ht "github.com/go-on/lib/html"
+	"github.com/go-on/lib/html/internal/element"
+	"github.com/go-on/lib/internal/replacer"
+	"github.com/go-on/wrap"
 )
 
 type templateDispatcher struct {
@@ -44,7 +45,7 @@ func (tw *templateDispatcher) ServeHTTP(w http.ResponseWriter, req *http.Request
 			case "text":
 				m.Call([]reflect.Value{
 					state,
-					reflect.ValueOf(&helper.EscapeHTMLResponseWriter{w}),
+					reflect.ValueOf(&wrap.RWEscapeHTML{w}),
 					reflect.ValueOf(req),
 				})
 				continue
