@@ -13,6 +13,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"reflect"
 	"sort"
 	"strings"
@@ -74,13 +75,13 @@ func (fs *FileStore) Save(a *App) error {
 func (fs *FileStore) Load(a *App) error {
 	fs.Mutex.Lock()
 	defer fs.Mutex.Unlock()
-	b, err := ioutil.ReadFile(fs.filename)
 
+	f, err := os.Open(fs.filename)
 	if err != nil {
 		return err
 	}
-
-	return json.Unmarshal(b, a)
+	defer f.Close()
+	return json.NewDecoder(f).Decode(a)
 }
 
 type Storable interface {
@@ -312,13 +313,10 @@ func (a *App) patchHandler(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	body, err := ioutil.ReadAll(req.Body)
-	if err != nil {
-		rw.WriteHeader(http.StatusInternalServerError)
-		rw.Write([]byte(err.Error()))
-	}
+	defer req.Body.Close()
 
-	err = json.Unmarshal(body, val)
+	err := json.NewDecoder(req.Body).Decode(val)
+
 	if err != nil {
 		rw.WriteHeader(http.StatusInternalServerError)
 		rw.Write([]byte(err.Error()))
@@ -370,15 +368,11 @@ func (a *App) postHandler(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	body, err := ioutil.ReadAll(req.Body)
-	if err != nil {
-		rw.WriteHeader(http.StatusInternalServerError)
-		rw.Write([]byte(err.Error()))
-	}
+	defer req.Body.Close()
 
 	val := reflect.New(ty.Elem()).Interface()
+	err := json.NewDecoder(req.Body).Decode(val)
 
-	err = json.Unmarshal(body, val)
 	if err != nil {
 		rw.WriteHeader(http.StatusInternalServerError)
 		rw.Write([]byte(err.Error()))

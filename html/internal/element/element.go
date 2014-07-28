@@ -3,12 +3,13 @@ package element
 import (
 	"bytes"
 	"fmt"
+	"io"
+
 	"github.com/go-on/builtin"
 	"github.com/go-on/lib/internal/shared"
 	"github.com/go-on/lib/internal/shared/placeholder"
 	"github.com/go-on/lib/internal/template"
 	"github.com/go-on/wrap-contrib/helper"
-	"io"
 	// "github.com/go-on/replacer"
 
 	"net/http"
