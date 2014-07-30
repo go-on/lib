@@ -6,9 +6,10 @@ import (
 )
 
 var (
-	Id_  = "uuid"
-	Item = route.New("/:ressource/:"+Id_, method.GET, method.PATCH, method.DELETE)
-	List = route.New("/:ressource/", method.POST, method.GET)
+	Id_        = "uuid"
+	Ressource_ = "ressource"
+	Item       = route.New("/:"+Ressource_+"/:"+Id_, method.GET, method.PATCH, method.DELETE)
+	List       = route.New("/:"+Ressource_+"/", method.POST, method.GET)
 )
 
 func Mount(mountPoint string) {
