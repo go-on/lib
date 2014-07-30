@@ -19,6 +19,8 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/go-on/method"
+
 	"github.com/go-on/lib/internal/pseudodb/pseudoroutes"
 
 	"github.com/go-contrib/uuid"
@@ -216,13 +218,18 @@ func (a *App) Find(key string) (val interface{}, found bool) {
 }
 
 func (a *App) RegisterRoutes(rt *router.Router) {
-	pseudoroutes.GET.GETHandler = http.HandlerFunc(a.getHandler)
-	pseudoroutes.PATCH.PATCHHandler = http.HandlerFunc(a.patchHandler)
-	pseudoroutes.POST.POSTHandler = http.HandlerFunc(a.postHandler)
-	pseudoroutes.DELETE.DELETEHandler = http.HandlerFunc(a.deleteHandler)
-	pseudoroutes.INDEX.GETHandler = http.HandlerFunc(a.indexHandler)
-	rt.AddRoute(pseudoroutes.GET)
-	rt.AddRoute(pseudoroutes.INDEX)
+	rt.HandleRouteMethodsFunc(pseudoroutes.Item, a.getHandler, method.GET)
+	// pseudoroutes.GET.GETHandler = http.HandlerFunc(a.getHandler)
+	rt.HandleRouteMethodsFunc(pseudoroutes.Item, a.patchHandler, method.PATCH)
+	// pseudoroutes.PATCH.PATCHHandler = http.HandlerFunc(a.patchHandler)
+	rt.HandleRouteMethodsFunc(pseudoroutes.List, a.postHandler, method.POST)
+	// pseudoroutes.POST.POSTHandler = http.HandlerFunc(a.postHandler)
+	rt.HandleRouteMethodsFunc(pseudoroutes.Item, a.deleteHandler, method.DELETE)
+	// pseudoroutes.DELETE.DELETEHandler = http.HandlerFunc(a.deleteHandler)
+	rt.HandleRouteMethodsFunc(pseudoroutes.List, a.indexHandler, method.GET)
+	// pseudoroutes.INDEX.GETHandler = http.HandlerFunc(a.indexHandler)
+	// rt.AddRoute(pseudoroutes.GET)
+	// rt.AddRoute(pseudoroutes.INDEX)
 	// rt.MustRegisterRoute(pseudoroutes.PATCH, method.PATCH, http.HandlerFunc(a.patchHandler))
 
 	// rt.MustRegisterRoute(pseudoroutes.POST, method.POST, http.HandlerFunc(a.postHandler))
