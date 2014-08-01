@@ -282,14 +282,14 @@ func (ø *Element) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	Post(ø, w)
 }
 
-func serveInner(ø *Element, w http.ResponseWriter, r *http.Request) (outer *wrap.RWBuffer) {
-	outer = wrap.NewRWBuffer(w)
+func serveInner(ø *Element, w http.ResponseWriter, r *http.Request) (outer *wrap.Buffer) {
+	outer = wrap.NewBuffer(w)
 	for _, in := range ø.Children {
 
 		switch ch := in.(type) {
 		//case *Element:
 		case http.Handler:
-			buf := wrap.NewRWBuffer(outer)
+			buf := wrap.NewBuffer(outer)
 			ch.ServeHTTP(buf, r)
 
 			switch buf.Code {

@@ -70,7 +70,7 @@ func (ø *DocType) Tag() string {
 var _ ElementLike = &DocType{}
 
 func (ø *DocType) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	inner := wrap.NewRWBuffer(w)
+	inner := wrap.NewBuffer(w)
 	ø.Element.ServeHTTP(inner, r)
 	switch inner.Code {
 	case 302, 301:
