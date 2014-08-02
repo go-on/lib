@@ -45,7 +45,7 @@ func (tw *templateDispatcher) ServeHTTP(w http.ResponseWriter, req *http.Request
 			case "text":
 				m.Call([]reflect.Value{
 					state,
-					reflect.ValueOf(&wrap.RWEscapeHTML{w}),
+					reflect.ValueOf(&wrap.EscapeHTML{w}),
 					reflect.ValueOf(req),
 				})
 				continue

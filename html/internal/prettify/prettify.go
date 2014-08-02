@@ -83,7 +83,7 @@ var Wrap = wrapper{}
 func (wr wrapper) Wrap(next http.Handler) http.Handler {
 	return http.HandlerFunc(
 		func(rw http.ResponseWriter, req *http.Request) {
-			buf := wrap.NewRWBuffer(rw)
+			buf := wrap.NewBuffer(rw)
 			next.ServeHTTP(buf, req)
 			pretty := Prettify(buf.BodyString())
 			buf.FlushHeaders()
