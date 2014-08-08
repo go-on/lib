@@ -2,11 +2,12 @@ package match
 
 import (
 	"fmt"
-	"github.com/go-on/builtin"
-	. "github.com/go-on/lib/html/internal/element"
-	"github.com/go-on/lib/internal/shared"
 	"regexp"
 	"strings"
+
+	"github.com/go-on/builtin"
+	. "github.com/go-on/lib/html/internal/element"
+	"github.com/go-on/lib/types"
 )
 
 // something that matches an Element
@@ -80,17 +81,17 @@ func (ø FieldMatcher) Matches(t *Element) (m bool) { return Is(t, FormField) }
 
 func New(thing interface{}) Matcher {
 	switch th := thing.(type) {
-	case shared.Class:
+	case types.Class:
 		return Class(th)
-	case shared.Id:
+	case types.Id:
 		return Id(th)
-	case shared.Tag:
+	case types.Tag:
 		return Tag(th)
-	case shared.HTMLString:
+	case types.HTMLString:
 		return HTML(th)
-	case shared.Style:
+	case types.Style:
 		return Style(th)
-	case shared.Attribute:
+	case types.Attribute:
 		return Attribute(th)
 	case string:
 		return tag(th)
@@ -103,7 +104,7 @@ func New(thing interface{}) Matcher {
 
 type class string
 
-func Class(c shared.Class) Matcher {
+func Class(c types.Class) Matcher {
 	return class(string(c))
 }
 
@@ -146,7 +147,7 @@ func (ø *Css) Matches(t *Element) (m bool) {
 
 type id string
 
-func Id(i shared.Id) Matcher {
+func Id(i types.Id) Matcher {
 	return id(string(i))
 }
 
@@ -159,7 +160,7 @@ func (ø id) Matches(t *Element) bool {
 
 type html string
 
-func HTML(h shared.HTMLString) Matcher {
+func HTML(h types.HTMLString) Matcher {
 	return html(h.String())
 }
 
@@ -175,7 +176,7 @@ func (ø html) Matches(t *Element) bool {
 
 type tag string
 
-func Tag(t shared.Tag) Matcher {
+func Tag(t types.Tag) Matcher {
 	return tag(string(t))
 }
 
@@ -187,7 +188,7 @@ type style struct {
 	key, value string
 }
 
-func Style(s shared.Style) Matcher {
+func Style(s types.Style) Matcher {
 	return style{s.Property, s.Value}
 }
 
@@ -204,7 +205,7 @@ type attribute struct {
 	key, value string
 }
 
-func Attribute(a shared.Attribute) Matcher {
+func Attribute(a types.Attribute) Matcher {
 	return attribute{a.Key, a.Value}
 }
 

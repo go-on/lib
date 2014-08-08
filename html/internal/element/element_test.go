@@ -3,7 +3,7 @@ package element
 import (
 	"bytes"
 	"fmt"
-	types "github.com/go-on/lib/internal/shared"
+	types "github.com/go-on/lib/types"
 	"net/http"
 	"net/http/httptest"
 	"testing"

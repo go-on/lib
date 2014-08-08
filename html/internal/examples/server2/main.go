@@ -7,7 +7,7 @@ import (
 	. "github.com/go-on/lib/html/internal/element"
 	"github.com/go-on/lib/html/internal/element/compiler"
 	. "github.com/go-on/lib/html/internal/htmlfat"
-	"github.com/go-on/lib/internal/shared"
+	"github.com/go-on/lib/types"
 	"github.com/go-on/router"
 	. "github.com/go-on/router/internal/routerfat"
 	"github.com/go-on/router/route"
@@ -93,17 +93,17 @@ func ListView(wr http.ResponseWriter, req *http.Request) {
 
 func (p *Person) VitaView(wr http.ResponseWriter, req *http.Request) {
 	DIV(
-		shared.Class("vita"),
+		types.Class("vita"),
 		H2("Vita"),
 		P(
-			shared.HTMLString(p.Vita.String()),
+			types.HTMLString(p.Vita.String()),
 		),
 	).WriteTo(wr)
 }
 
 var (
-	yellow        = shared.Style{"background-color", "yellow"}
-	green         = shared.Style{"background-color", "green"}
+	yellow        = types.Style{"background-color", "yellow"}
+	green         = types.Style{"background-color", "green"}
 	personDetails *route.Route
 	personList    *route.Route
 )

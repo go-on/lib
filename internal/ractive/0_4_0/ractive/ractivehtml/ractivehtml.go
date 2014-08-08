@@ -3,7 +3,7 @@ package ractivehtml
 import (
 	"github.com/go-on/lib/html"
 	"github.com/go-on/lib/html/internal/element"
-	"github.com/go-on/lib/internal/shared"
+	"github.com/go-on/lib/types"
 )
 
 func context(name string, inner ...interface{}) *element.Element {
@@ -32,8 +32,8 @@ func Not(name string, inner ...interface{}) *element.Element {
 	return el
 }
 
-func NewTemplate(id shared.Id, inner ...interface{}) *element.Element {
-	sc := html.SCRIPT(id, shared.Attribute{"type", "text/ractive"})
+func NewTemplate(id types.Id, inner ...interface{}) *element.Element {
+	sc := html.SCRIPT(id, types.Attribute{"type", "text/ractive"})
 	sc.Add(inner...)
 	return sc
 }

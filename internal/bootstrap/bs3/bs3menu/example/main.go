@@ -2,16 +2,18 @@ package main
 
 import (
 	"encoding/json"
+
 	"github.com/go-on/cdncache"
 	. "github.com/go-on/lib/html"
 	"github.com/go-on/lib/internal/bootstrap/bs3"
 	"github.com/go-on/lib/internal/bootstrap/bs3/bs3menu"
-	"github.com/go-on/lib/internal/shared"
+	"github.com/go-on/lib/types"
 	// "github.com/go-on/html/h"
 	// . "github.com/go-on/html/tag"
+	"net/http"
+
 	"github.com/go-on/lib/internal/menu"
 	"github.com/go-on/lib/internal/menu/menuhandler"
-	"net/http"
 )
 
 var menuJson = `
@@ -179,7 +181,7 @@ func main() {
 							DIV(bs3.Panel_body,
 								menuhandler.NewStaticSub(Menu, 2, 2, bs3menu.Tabs(true, true)),
 								DIV(bs3.Tab_content,
-									DIV(bs3.Tab_pane, shared.Id("uk"),
+									DIV(bs3.Tab_pane, types.Id("uk"),
 										AHref("http://en.wikipedia.org/wiki/United_Kingdom", "From Wikipedia:"),
 										CITE(
 											`The United Kingdom of Great Britain and Northern Ireland,`+
@@ -188,7 +190,7 @@ func main() {
 												`continental Europe.`,
 										),
 									),
-									DIV(bs3.Tab_pane, shared.Id("france"),
+									DIV(bs3.Tab_pane, types.Id("france"),
 										AHref("http://en.wikipedia.org/wiki/France", "From Wikipedia:"),
 										CITE(
 											`France (UK: /frɑːns/; US: Listeni/fræns/; French: [fʁɑ̃s], `+

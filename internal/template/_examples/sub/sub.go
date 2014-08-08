@@ -3,8 +3,8 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"html"
 	. "github.com/go-on/template"
+	"html"
 )
 
 type (

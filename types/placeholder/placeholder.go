@@ -2,24 +2,25 @@ package placeholder
 
 import (
 	"fmt"
-	"github.com/go-on/lib/internal/replacer"
-	"github.com/go-on/lib/internal/shared"
-	"github.com/go-on/lib/internal/template"
 	"reflect"
+
+	"github.com/go-on/lib/internal/replacer"
+	"github.com/go-on/lib/internal/template"
+	"github.com/go-on/lib/types"
 
 	ph "github.com/go-on/lib/internal/template/placeholder"
 )
 
 var (
-	commentType   = reflect.TypeOf(shared.Comment("")).Name()
-	descrType     = reflect.TypeOf(shared.Descr("")).Name()
-	classType     = reflect.TypeOf(shared.Class("")).Name()
-	idType        = reflect.TypeOf(shared.Id("")).Name()
-	htmlType      = reflect.TypeOf(shared.HTMLString("")).Name()
-	textType      = reflect.TypeOf(shared.Text("")).Name()
-	attributeType = reflect.TypeOf(shared.Attribute{}).Name()
-	tagType       = reflect.TypeOf(shared.Tag("")).Name()
-	styleType     = reflect.TypeOf(shared.Style{}).Name()
+	commentType   = reflect.TypeOf(types.Comment("")).Name()
+	descrType     = reflect.TypeOf(types.Descr("")).Name()
+	classType     = reflect.TypeOf(types.Class("")).Name()
+	idType        = reflect.TypeOf(types.Id("")).Name()
+	htmlType      = reflect.TypeOf(types.HTMLString("")).Name()
+	textType      = reflect.TypeOf(types.Text("")).Name()
+	attributeType = reflect.TypeOf(types.Attribute{}).Name()
+	tagType       = reflect.TypeOf(types.Tag("")).Name()
+	styleType     = reflect.TypeOf(types.Style{}).Name()
 )
 
 // TODO: extract the template.Setter interface in a extra subpackage and just include that subpackage
@@ -36,40 +37,40 @@ type Placeholder interface {
 func New(thing interface{}) Placeholder {
 
 	switch ø := thing.(type) {
-	case shared.Comment:
+	case types.Comment:
 		return newTPh(template.NewPlaceholder(commentType+"."+string(ø)), ø)
-	case shared.Descr:
+	case types.Descr:
 		return newTPh(template.NewPlaceholder(descrType+"."+string(ø)), ø)
-	case shared.Class:
+	case types.Class:
 		return newTPh(template.NewPlaceholder(classType+"."+string(ø)), ø)
-	case shared.Id:
+	case types.Id:
 		return newTPh(template.NewPlaceholder(idType+"."+string(ø)), ø)
-	case shared.HTMLString:
+	case types.HTMLString:
 		return newTPh(template.NewPlaceholder(htmlType+"."+string(ø)), ø)
-	case shared.Text:
-		t := template.NewPlaceholder(textType+"."+string(ø), handleStrings(shared.EscapeHTML))
+	case types.Text:
+		t := template.NewPlaceholder(textType+"."+string(ø), handleStrings(types.EscapeHTML))
 		return newTPh(t, ø)
-	case shared.Attribute:
+	case types.Attribute:
 		fn := func(in string) string {
-			return (shared.Attribute{ø.Key, in}).String()
+			return (types.Attribute{ø.Key, in}).String()
 		}
 		t := template.NewPlaceholder(attributeType+"."+ø.Value, handleStrings(fn))
 		return newTPh(t, ø)
-	case shared.Tag:
+	case types.Tag:
 		return newTPh(template.NewPlaceholder(tagType+"."+string(ø)), ø)
-	case shared.Style:
+	case types.Style:
 		fn := func(in string) string {
-			return (shared.Style{ø.Property, in}).String()
+			return (types.Style{ø.Property, in}).String()
 		}
 		t := template.NewPlaceholder(styleType+"."+ø.Value, handleStrings(fn))
 		return newTPh(t, ø)
 	case string:
-		t := template.NewPlaceholder(textType+"."+ø, handleStrings(shared.EscapeHTML))
-		return newTPh(t, shared.Text(ø))
+		t := template.NewPlaceholder(textType+"."+ø, handleStrings(types.EscapeHTML))
+		return newTPh(t, types.Text(ø))
 	default:
 		str := fmt.Sprintf("%v", ø)
-		t := template.NewPlaceholder(textType+"."+str, handleStrings(shared.EscapeHTML))
-		return newTPh(t, shared.Text(str))
+		t := template.NewPlaceholder(textType+"."+str, handleStrings(types.EscapeHTML))
+		return newTPh(t, types.Text(str))
 	}
 
 }

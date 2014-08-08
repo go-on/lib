@@ -8,16 +8,16 @@ import (
 	"github.com/go-on/lib/internal/template/placeholder"
 
 	. "github.com/go-on/lib/html"
-	"github.com/go-on/lib/internal/shared"
-	ph "github.com/go-on/lib/internal/shared/placeholder"
 	"github.com/go-on/lib/internal/template"
+	"github.com/go-on/lib/types"
+	ph "github.com/go-on/lib/types/placeholder"
 	tt "html/template"
 	"testing"
 )
 
 var (
-	_description_ = ph.New(shared.HTMLString("description"))
-	_plaintext_   = ph.New(shared.Text("plaintext"))
+	_description_ = ph.New(types.HTMLString("description"))
+	_plaintext_   = ph.New(types.Text("plaintext"))
 
 	PlaceholderMap = map[string]ph.Placeholder{
 		"<p>desc</p>": _description_,
@@ -53,15 +53,15 @@ func SimpleTemplate(description, plaintext builtin.Stringer) *element.Element {
 
 func TemplateTCreator() *element.Element {
 	return SimpleTemplate(
-		shared.HTMLString(`{{.description}}`),
-		shared.HTMLString(`{{.plaintext}}`),
+		types.HTMLString(`{{.description}}`),
+		types.HTMLString(`{{.plaintext}}`),
 	)
 }
 
 func NTemplate() *element.Element {
-	t := SimpleTemplate(shared.HTMLString("<p>desc</p>"), shared.Text("<escaped>"))
+	t := SimpleTemplate(types.HTMLString("<p>desc</p>"), types.Text("<escaped>"))
 	for i := 0; i < 2500; i++ {
-		t = SimpleTemplate(t, shared.Text("<escaped>"))
+		t = SimpleTemplate(t, types.Text("<escaped>"))
 	}
 	return t
 }
@@ -69,7 +69,7 @@ func NTemplate() *element.Element {
 func MTemplate() *element.Element {
 	t := element.Elements()
 	for i := 0; i < 5000; i++ {
-		t.MustAdd(SimpleTemplate(shared.HTMLString(fmt.Sprintf("<p>desc%d</p>", i)), shared.Text(fmt.Sprintf("<escaped%d>", i))))
+		t.MustAdd(SimpleTemplate(types.HTMLString(fmt.Sprintf("<p>desc%d</p>", i)), types.Text(fmt.Sprintf("<escaped%d>", i))))
 	}
 	return t
 }
@@ -90,7 +90,7 @@ func PrepareMPlaceholder() {
 func TemplateMCreator() *html.Element {
 	t := html.Elements()
 	for i := 0; i < 5000; i++ {
-		t.MustAdd(SimpleTemplate(shared.HTMLString(fmt.Sprintf("{{.description%d}}", i)), shared.HTMLString(fmt.Sprintf("{{.plaintext%d}}", i))))
+		t.MustAdd(SimpleTemplate(types.HTMLString(fmt.Sprintf("{{.description%d}}", i)), types.HTMLString(fmt.Sprintf("{{.plaintext%d}}", i))))
 	}
 	return t
 }
@@ -100,7 +100,7 @@ func TemplateNCreator() *html.Element {
 		html.Html(`{{.description}}`),
 		html.Html(`{{.plaintext}}`))
 	for i := 0; i < 2500; i++ {
-		t = SimpleTemplate(t, shared.HTMLString(`{{.plaintext}}`))
+		t = SimpleTemplate(t, types.HTMLString(`{{.plaintext}}`))
 	}
 	return t
 }

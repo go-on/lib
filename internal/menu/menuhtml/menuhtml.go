@@ -3,16 +3,17 @@ package menuhtml
 import (
 	. "github.com/go-on/lib/html"
 	"github.com/go-on/lib/html/internal/element"
-	"github.com/go-on/lib/internal/shared"
+	"github.com/go-on/lib/types"
 	// "github.com/go-on/html/h"
 	// "github.com/go-on/html/tag"
-	"github.com/go-on/lib/internal/menu"
 	"io"
+
+	"github.com/go-on/lib/internal/menu"
 )
 
 type Formatter interface {
 	Item(path, text string, isActive, hasChildren bool, depth int) *element.Element
-	ClassOpen() shared.Class
+	ClassOpen() types.Class
 	List(depth int, text string) *element.Element
 }
 
@@ -82,9 +83,9 @@ func (d *formatterWriterTo) WriterTo(menu *menu.Node, depth int, path string) io
 	return elem
 }
 
-type ul struct{ classOpen, classActive, classSub shared.Class }
+type ul struct{ classOpen, classActive, classSub types.Class }
 
-func NewUL(classOpen, classActive, classSub shared.Class) menu.WriterTo {
+func NewUL(classOpen, classActive, classSub types.Class) menu.WriterTo {
 	return New(&ul{classOpen, classActive, classSub})
 }
 
@@ -101,7 +102,7 @@ func (u *ul) Item(path, text string, isActive, hasChildren bool, depth int) (li 
 	return
 }
 
-func (u *ul) ClassOpen() shared.Class { return u.classOpen }
+func (u *ul) ClassOpen() types.Class { return u.classOpen }
 
 func (u *ul) List(depth int, text string) (ul *element.Element) {
 	ul = UL()
@@ -113,8 +114,8 @@ func (u *ul) List(depth int, text string) (ul *element.Element) {
 
 /*
 var Ul = &Default_{
-	ActiveClass:  shared.Class("menu-active"),
-	OpenClass:    shared.Class("menu-open"),
+	ActiveClass:  types.Class("menu-active"),
+	OpenClass:    types.Class("menu-open"),
 	ListElement:  UL,
 	EntryElement: LI,
 }

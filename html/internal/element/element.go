@@ -8,9 +8,9 @@ import (
 	"github.com/go-on/wrap"
 
 	"github.com/go-on/builtin"
-	"github.com/go-on/lib/internal/shared"
-	"github.com/go-on/lib/internal/shared/placeholder"
 	"github.com/go-on/lib/internal/template"
+	"github.com/go-on/lib/types"
+	"github.com/go-on/lib/types/placeholder"
 
 	// "github.com/go-on/replacer"
 
@@ -97,13 +97,13 @@ func jsSpecialEscape(in string) string {
 type Element struct {
 	tag        string
 	flags      flag
-	Id         shared.Id
-	Descr      shared.Descr
+	Id         types.Id
+	Descr      types.Descr
 	Parent     ElementLike
-	Attributes []shared.Attribute
-	Classes    []shared.Class
+	Attributes []types.Attribute
+	Classes    []types.Class
 	Children   []builtin.Stringer
-	Styles     []shared.Style
+	Styles     []types.Style
 	//PlaceholderHandler []template.PlaceholderHandler
 }
 
@@ -181,27 +181,27 @@ func (ø *Element) Add(objects ...interface{}) {
 			continue
 		case string:
 			addText(ø, v)
-		case shared.Text:
+		case types.Text:
 			addText(ø, string(v))
-		case shared.HTMLString:
+		case types.HTMLString:
 			addChild(ø, v)
-		case shared.Comment:
+		case types.Comment:
 			addChild(ø, v)
-		case shared.Descr:
+		case types.Descr:
 			ø.Descr = v
-		case shared.Attribute:
+		case types.Attribute:
 			ø.Attributes = append(ø.Attributes, v)
-		case []shared.Attribute:
+		case []types.Attribute:
 			ø.Attributes = append(ø.Attributes, v...)
-		case []shared.Class:
+		case []types.Class:
 			addClasses(ø, v)
-		case shared.Class:
+		case types.Class:
 			addClass(ø, v)
-		case shared.Id:
+		case types.Id:
 			ø.Id = v
-		case shared.Style:
+		case types.Style:
 			addStyle(ø, v)
-		case []shared.Style:
+		case []types.Style:
 			addStyles(ø, v)
 		case *Element:
 			addChild(ø, v)
@@ -213,7 +213,7 @@ func (ø *Element) Add(objects ...interface{}) {
 			addChild(ø, handlerFuncElement(v))
 		case http.Handler:
 			addChild(ø, handlerFuncElement(v.ServeHTTP))
-		case shared.HTMLer:
+		case types.HTMLer:
 			addChild(ø, &htmlerstring{v})
 		case builtin.Stringer:
 			addText(ø, v.String())

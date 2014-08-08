@@ -6,7 +6,7 @@ import (
 
 	// "github.com/go-on/lib/html"
 	"github.com/go-on/lib/html/internal/element"
-	"github.com/go-on/lib/internal/shared"
+	"github.com/go-on/lib/types"
 )
 
 //	This package contains structs based on angualar js
@@ -35,97 +35,97 @@ var ANGULAR_VERSION = "1.2.2"
 //type Template string // any string which can contain {{}} markup.
 
 // take module
-func App(module string) shared.Attribute { return shared.Attribute{`ng-app`, module} }
+func App(module string) types.Attribute { return types.Attribute{`ng-app`, module} }
 
 // take expression
-func Bind(expr string) shared.Attribute       { return shared.Attribute{`ng-bind`, expr} }
-func BindHtml(expr string) shared.Attribute   { return shared.Attribute{`ng-bind-html`, expr} }
-func Blur(expr string) shared.Attribute       { return shared.Attribute{`ng-blur`, expr} }
-func Change(expr string) shared.Attribute     { return shared.Attribute{`ng-change`, expr} }
-func Checked(expr string) shared.Attribute    { return shared.Attribute{`ng-checked`, expr} }
-func Class(expr string) shared.Attribute      { return shared.Attribute{`ng-class`, expr} }
-func ClassEven(expr string) shared.Attribute  { return shared.Attribute{`ng-class-even`, expr} }
-func ClassOdd(expr string) shared.Attribute   { return shared.Attribute{`ng-class-odd`, expr} }
-func Click(expr string) shared.Attribute      { return shared.Attribute{`ng-click`, expr} }
-func Controller(expr string) shared.Attribute { return shared.Attribute{`ng-controller`, expr} }
-func Copy(expr string) shared.Attribute       { return shared.Attribute{`ng-copy`, expr} }
-func Csp(expr string) shared.Attribute        { return shared.Attribute{`ng-csp`, expr} }
-func Cut(expr string) shared.Attribute        { return shared.Attribute{`ng-cut`, expr} }
-func Dblclick(expr string) shared.Attribute   { return shared.Attribute{`ng-dblclick`, expr} }
-func Disabled(expr string) shared.Attribute   { return shared.Attribute{`ng-disabled`, expr} }
-func Focus(expr string) shared.Attribute      { return shared.Attribute{`ng-focus`, expr} }
-func Hide(expr string) shared.Attribute       { return shared.Attribute{`ng-hide`, expr} }
-func If(expr string) shared.Attribute         { return shared.Attribute{`ng-if`, expr} }
-func Init(expr string) shared.Attribute       { return shared.Attribute{`ng-init`, expr} }
-func Keydown(expr string) shared.Attribute    { return shared.Attribute{`ng-keydown`, expr} }
-func Keypress(expr string) shared.Attribute   { return shared.Attribute{`ng-keypress`, expr} }
-func Keyup(expr string) shared.Attribute      { return shared.Attribute{`ng-keyup`, expr} }
-func Mousedown(expr string) shared.Attribute  { return shared.Attribute{`ng-mousedown`, expr} }
-func Mouseenter(expr string) shared.Attribute { return shared.Attribute{`ng-mouseenter`, expr} }
-func Mouseleave(expr string) shared.Attribute { return shared.Attribute{`ng-mouseleave`, expr} }
-func Mousemove(expr string) shared.Attribute  { return shared.Attribute{`ng-mousemove`, expr} }
-func Mouseover(expr string) shared.Attribute  { return shared.Attribute{`ng-mouseover`, expr} }
-func Mouseup(expr string) shared.Attribute    { return shared.Attribute{`ng-mouseup`, expr} }
-func Open(expr string) shared.Attribute       { return shared.Attribute{`ng-open`, expr} }
-func Paste(expr string) shared.Attribute      { return shared.Attribute{`ng-paste`, expr} }
-func Readonly(expr string) shared.Attribute   { return shared.Attribute{`ng-readonly`, expr} }
-func Selected(expr string) shared.Attribute   { return shared.Attribute{`ng-selected`, expr} }
-func Show(expr string) shared.Attribute       { return shared.Attribute{`ng-show`, expr} }
-func Style(expr string) shared.Attribute      { return shared.Attribute{`ng-style`, expr} }
-func Submit(expr string) shared.Attribute     { return shared.Attribute{`ng-submit`, expr} }
-func Switch(expr string) shared.Attribute     { return shared.Attribute{`ng-switch`, expr} }
+func Bind(expr string) types.Attribute       { return types.Attribute{`ng-bind`, expr} }
+func BindHtml(expr string) types.Attribute   { return types.Attribute{`ng-bind-html`, expr} }
+func Blur(expr string) types.Attribute       { return types.Attribute{`ng-blur`, expr} }
+func Change(expr string) types.Attribute     { return types.Attribute{`ng-change`, expr} }
+func Checked(expr string) types.Attribute    { return types.Attribute{`ng-checked`, expr} }
+func Class(expr string) types.Attribute      { return types.Attribute{`ng-class`, expr} }
+func ClassEven(expr string) types.Attribute  { return types.Attribute{`ng-class-even`, expr} }
+func ClassOdd(expr string) types.Attribute   { return types.Attribute{`ng-class-odd`, expr} }
+func Click(expr string) types.Attribute      { return types.Attribute{`ng-click`, expr} }
+func Controller(expr string) types.Attribute { return types.Attribute{`ng-controller`, expr} }
+func Copy(expr string) types.Attribute       { return types.Attribute{`ng-copy`, expr} }
+func Csp(expr string) types.Attribute        { return types.Attribute{`ng-csp`, expr} }
+func Cut(expr string) types.Attribute        { return types.Attribute{`ng-cut`, expr} }
+func Dblclick(expr string) types.Attribute   { return types.Attribute{`ng-dblclick`, expr} }
+func Disabled(expr string) types.Attribute   { return types.Attribute{`ng-disabled`, expr} }
+func Focus(expr string) types.Attribute      { return types.Attribute{`ng-focus`, expr} }
+func Hide(expr string) types.Attribute       { return types.Attribute{`ng-hide`, expr} }
+func If(expr string) types.Attribute         { return types.Attribute{`ng-if`, expr} }
+func Init(expr string) types.Attribute       { return types.Attribute{`ng-init`, expr} }
+func Keydown(expr string) types.Attribute    { return types.Attribute{`ng-keydown`, expr} }
+func Keypress(expr string) types.Attribute   { return types.Attribute{`ng-keypress`, expr} }
+func Keyup(expr string) types.Attribute      { return types.Attribute{`ng-keyup`, expr} }
+func Mousedown(expr string) types.Attribute  { return types.Attribute{`ng-mousedown`, expr} }
+func Mouseenter(expr string) types.Attribute { return types.Attribute{`ng-mouseenter`, expr} }
+func Mouseleave(expr string) types.Attribute { return types.Attribute{`ng-mouseleave`, expr} }
+func Mousemove(expr string) types.Attribute  { return types.Attribute{`ng-mousemove`, expr} }
+func Mouseover(expr string) types.Attribute  { return types.Attribute{`ng-mouseover`, expr} }
+func Mouseup(expr string) types.Attribute    { return types.Attribute{`ng-mouseup`, expr} }
+func Open(expr string) types.Attribute       { return types.Attribute{`ng-open`, expr} }
+func Paste(expr string) types.Attribute      { return types.Attribute{`ng-paste`, expr} }
+func Readonly(expr string) types.Attribute   { return types.Attribute{`ng-readonly`, expr} }
+func Selected(expr string) types.Attribute   { return types.Attribute{`ng-selected`, expr} }
+func Show(expr string) types.Attribute       { return types.Attribute{`ng-show`, expr} }
+func Style(expr string) types.Attribute      { return types.Attribute{`ng-style`, expr} }
+func Submit(expr string) types.Attribute     { return types.Attribute{`ng-submit`, expr} }
+func Switch(expr string) types.Attribute     { return types.Attribute{`ng-switch`, expr} }
 
 // take string
-func BindTemplate(s string) shared.Attribute { return shared.Attribute{`ng-bind-template`, s} }
-func Form(s string) shared.Attribute         { return shared.Attribute{`ng-form`, s} }
-func Model(s string) shared.Attribute        { return shared.Attribute{`ng-model`, s} }
-func Include(s string) shared.Attribute      { return shared.Attribute{`ng-include`, s} }
-func List(s string) shared.Attribute         { return shared.Attribute{`ng-list`, s} }
-func Value(s string) shared.Attribute        { return shared.Attribute{`ng-value`, s} }
-func SwitchWhen(s string) shared.Attribute   { return shared.Attribute{`ng-switch-when`, s} }
+func BindTemplate(s string) types.Attribute { return types.Attribute{`ng-bind-template`, s} }
+func Form(s string) types.Attribute         { return types.Attribute{`ng-form`, s} }
+func Model(s string) types.Attribute        { return types.Attribute{`ng-model`, s} }
+func Include(s string) types.Attribute      { return types.Attribute{`ng-include`, s} }
+func List(s string) types.Attribute         { return types.Attribute{`ng-list`, s} }
+func Value(s string) types.Attribute        { return types.Attribute{`ng-value`, s} }
+func SwitchWhen(s string) types.Attribute   { return types.Attribute{`ng-switch-when`, s} }
 
 // take template
-func Href(template string) shared.Attribute   { return shared.Attribute{`ng-href`, template} }
-func Src(template string) shared.Attribute    { return shared.Attribute{`ng-src`, template} }
-func SrcSet(template string) shared.Attribute { return shared.Attribute{`ng-srcset`, template} }
+func Href(template string) types.Attribute   { return types.Attribute{`ng-href`, template} }
+func Src(template string) types.Attribute    { return types.Attribute{`ng-src`, template} }
+func SrcSet(template string) types.Attribute { return types.Attribute{`ng-srcset`, template} }
 
 // take nothing
-func Cloak() shared.Attribute       { return shared.Attribute{`ng-cloak`, `ng-cloak`} }
-func NonBindable() shared.Attribute { return shared.Attribute{`ng-non-bindable`, `ng-non-bindable`} }
-func Transclude() shared.Attribute  { return shared.Attribute{`ng-transclude`, `ng-transclude`} }
-func RepeatEnd() shared.Attribute   { return shared.Attribute{`ng-repeat-end`, `ng-repeat-end`} }
-func SwitchDefault() shared.Attribute {
-	return shared.Attribute{`ng-switch-default`, `ng-switch-default`}
+func Cloak() types.Attribute       { return types.Attribute{`ng-cloak`, `ng-cloak`} }
+func NonBindable() types.Attribute { return types.Attribute{`ng-non-bindable`, `ng-non-bindable`} }
+func Transclude() types.Attribute  { return types.Attribute{`ng-transclude`, `ng-transclude`} }
+func RepeatEnd() types.Attribute   { return types.Attribute{`ng-repeat-end`, `ng-repeat-end`} }
+func SwitchDefault() types.Attribute {
+	return types.Attribute{`ng-switch-default`, `ng-switch-default`}
 }
 
 type repeat struct{ name, tempVar, collection string }
 
-func (r repeat) Attr() shared.Attribute {
-	return shared.Attribute{r.name, fmt.Sprintf("%s in %s", r.tempVar, r.collection)}
+func (r repeat) Attr() types.Attribute {
+	return types.Attribute{r.name, fmt.Sprintf("%s in %s", r.tempVar, r.collection)}
 }
 
-func Repeat(tempVar string, collection string) shared.Attribute {
+func Repeat(tempVar string, collection string) types.Attribute {
 	r := repeat{`ng-repeat`, tempVar, collection}
 	return r.Attr()
 }
 
-func RepeatStart(tempVar string, collection string) shared.Attribute {
+func RepeatStart(tempVar string, collection string) types.Attribute {
 	r := repeat{`ng-repeat-start`, tempVar, collection}
 	return r.Attr()
 }
 
 type repeatKeyVal struct{ name, tempKey, tempVal, collection string }
 
-func (r repeatKeyVal) Attr() shared.Attribute {
-	return shared.Attribute{r.name, fmt.Sprintf("(%s, %s) in %s", r.tempKey, r.tempVal, r.collection)}
+func (r repeatKeyVal) Attr() types.Attribute {
+	return types.Attribute{r.name, fmt.Sprintf("(%s, %s) in %s", r.tempKey, r.tempVal, r.collection)}
 }
 
-func RepeatKeyVal(tempKey string, tempVal string, collection string) shared.Attribute {
+func RepeatKeyVal(tempKey string, tempVal string, collection string) types.Attribute {
 	r := repeatKeyVal{`ng-repeat`, tempKey, tempVal, collection}
 	return r.Attr()
 }
 
-func RepeatStartKeyVal(tempKey string, tempVal string, collection string) shared.Attribute {
+func RepeatStartKeyVal(tempKey string, tempVal string, collection string) types.Attribute {
 	r := repeatKeyVal{`ng-repeat-start`, tempKey, tempVal, collection}
 	return r.Attr()
 }
@@ -137,22 +137,22 @@ type repeatTrackBy struct {
 	trackBy    string
 }
 
-func (r repeatTrackBy) Attr() shared.Attribute {
-	return shared.Attribute{`ng-repeat`, fmt.Sprintf("%s in %s track by %s", r.tempVar, r.collection, r.trackBy)}
+func (r repeatTrackBy) Attr() types.Attribute {
+	return types.Attribute{`ng-repeat`, fmt.Sprintf("%s in %s track by %s", r.tempVar, r.collection, r.trackBy)}
 }
 
-func RepeatTrackBy(tempVar, collection, trackBy string) shared.Attribute {
+func RepeatTrackBy(tempVar, collection, trackBy string) types.Attribute {
 	r := repeatTrackBy{`ng-repeat`, tempVar, collection, trackBy}
 	return r.Attr()
 }
 
-func RepeatStartTrackBy(tempVar, collection, trackBy string) shared.Attribute {
+func RepeatStartTrackBy(tempVar, collection, trackBy string) types.Attribute {
 	r := repeatTrackBy{`ng-repeat-start`, tempVar, collection, trackBy}
 	return r.Attr()
 }
 
-func Script(id string, elem *element.Element) shared.HTMLString {
-	return shared.HTMLString(fmt.Sprintf(`<script type="text/ng-template" id="%s">%s</script>`, id, elem.String()))
+func Script(id string, elem *element.Element) types.HTMLString {
+	return types.HTMLString(fmt.Sprintf(`<script type="text/ng-template" id="%s">%s</script>`, id, elem.String()))
 }
 
 type OptionsArray struct {
@@ -262,14 +262,14 @@ type Pluralize struct {
 	Offset int
 }
 
-func (p Pluralize) Attrs() []shared.Attribute {
-	attrs := []shared.Attribute{
-		shared.Attribute{"ng-pluralize", "ng-pluralize"},
-		shared.Attribute{"count", p.Count},
-		shared.Attribute{"when", p.When},
+func (p Pluralize) Attrs() []types.Attribute {
+	attrs := []types.Attribute{
+		types.Attribute{"ng-pluralize", "ng-pluralize"},
+		types.Attribute{"count", p.Count},
+		types.Attribute{"when", p.When},
 	}
 	if p.Offset != 0 {
-		attrs = append(attrs, shared.Attribute{"offset", fmt.Sprintf("%d", p.Offset)})
+		attrs = append(attrs, types.Attribute{"offset", fmt.Sprintf("%d", p.Offset)})
 	}
 	return attrs
 }

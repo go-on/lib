@@ -3,14 +3,15 @@ package element
 import (
 	"bytes"
 	"fmt"
-	"github.com/go-on/builtin"
-	"github.com/go-on/lib/internal/shared"
-	"github.com/go-on/lib/internal/shared/placeholder"
 	"io"
+
+	"github.com/go-on/builtin"
+	"github.com/go-on/lib/types"
+	"github.com/go-on/lib/types/placeholder"
 )
 
 type htmlerstring struct {
-	shared.HTMLer
+	types.HTMLer
 }
 
 func (h *htmlerstring) String() string {
@@ -21,13 +22,13 @@ func (h *htmlerstring) String() string {
 func AttrsString(ø *Element) (res string) {
 	var buffer bytes.Buffer
 	if !Is(ø, IdForbidden) && ø.Id != "" {
-		buffer.WriteString(" " + shared.Attribute{"id", string(ø.Id)}.String())
+		buffer.WriteString(" " + types.Attribute{"id", string(ø.Id)}.String())
 	}
 	if !Is(ø, ClassForbidden) && len(ø.Classes) > 0 {
-		buffer.WriteString(" " + shared.Attribute{"class", classAttrString(ø.Classes)}.String())
+		buffer.WriteString(" " + types.Attribute{"class", classAttrString(ø.Classes)}.String())
 	}
 	if !Is(ø, Invisible) && len(ø.Styles) > 0 {
-		buffer.WriteString(" " + shared.Attribute{"style", css(ø.Styles)}.String())
+		buffer.WriteString(" " + types.Attribute{"style", css(ø.Styles)}.String())
 	}
 
 	for _, v := range ø.Attributes {
@@ -40,7 +41,7 @@ func AttrsString(ø *Element) (res string) {
 	return buffer.String()
 }
 
-func classAttrString(classes []shared.Class) (s string) {
+func classAttrString(classes []types.Class) (s string) {
 	var buffer bytes.Buffer
 	for _, cl := range classes {
 		buffer.WriteString(" " + string(cl))
@@ -48,7 +49,7 @@ func classAttrString(classes []shared.Class) (s string) {
 	return buffer.String()[1:]
 }
 
-func css(fds []shared.Style) (s string) {
+func css(fds []types.Style) (s string) {
 	var buffer bytes.Buffer
 	for _, v := range fds {
 		buffer.WriteString(v.String())
@@ -57,23 +58,23 @@ func css(fds []shared.Style) (s string) {
 }
 
 // adds css properties to the style attribute, same keys are overwritten
-func addStyles(ø *Element, v []shared.Style) {
+func addStyles(ø *Element, v []types.Style) {
 	ø.Styles = append(ø.Styles, v...)
 }
 
-func addStyle(ø *Element, v shared.Style) {
+func addStyle(ø *Element, v types.Style) {
 	ø.Styles = append(ø.Styles, v)
 }
 
 func addText(ø *Element, text string) {
-	s := shared.Text(text)
+	s := types.Text(text)
 
 	if !Is(ø, WithoutEscaping) {
-		s = shared.Text(shared.EscapeHTML(text))
+		s = types.Text(types.EscapeHTML(text))
 	}
 
 	if Is(ø, JavascriptSpecialEscaping) {
-		s = shared.Text(jsSpecialEscape(text))
+		s = types.Text(jsSpecialEscape(text))
 	}
 	ø.Children = append(ø.Children, s)
 }
@@ -82,34 +83,34 @@ func addChild(ø *Element, child builtin.Stringer) {
 	ø.Children = append(ø.Children, child)
 }
 
-func addClass(ø *Element, class shared.Class) {
+func addClass(ø *Element, class types.Class) {
 	ø.Classes = append(ø.Classes, class)
 }
 
-func addClasses(ø *Element, classes []shared.Class) {
+func addClasses(ø *Element, classes []types.Class) {
 	ø.Classes = append(ø.Classes, classes...)
 }
 
 func addPlaceholder(ø *Element, v placeholder.Placeholder) {
 	switch tp := v.Type().(type) {
-	case shared.Descr:
-		ø.Add(shared.Descr(v.String()))
-	case shared.Id:
-		ø.Add(shared.Id(v.String()))
-	case shared.Class:
-		ø.Add(shared.Class(v.String()))
-	case shared.HTMLString:
-		ø.Add(shared.HTMLString(v.String()))
-	case shared.Text:
-		ø.Add(shared.Text(v.String()))
-	case shared.Attribute:
-		ø.Add(shared.Attribute{tp.Key, v.String()})
-	case shared.Tag:
+	case types.Descr:
+		ø.Add(types.Descr(v.String()))
+	case types.Id:
+		ø.Add(types.Id(v.String()))
+	case types.Class:
+		ø.Add(types.Class(v.String()))
+	case types.HTMLString:
+		ø.Add(types.HTMLString(v.String()))
+	case types.Text:
+		ø.Add(types.Text(v.String()))
+	case types.Attribute:
+		ø.Add(types.Attribute{tp.Key, v.String()})
+	case types.Tag:
 		ø.tag = v.String()
-	case shared.Style:
-		ø.Add(shared.Style{tp.Property, v.String()})
+	case types.Style:
+		ø.Add(types.Style{tp.Property, v.String()})
 	default:
-		ø.Add(shared.Text(v.String()))
+		ø.Add(types.Text(v.String()))
 	}
 }
 

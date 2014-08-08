@@ -2,10 +2,11 @@ package menuhtml
 
 import (
 	"bytes"
-	"github.com/go-on/lib/internal/menu"
-	"github.com/go-on/lib/internal/shared"
 	"strings"
 	"testing"
+
+	"github.com/go-on/lib/internal/menu"
+	"github.com/go-on/lib/types"
 )
 
 func stripWhiteSpace(in string) string {
@@ -38,7 +39,7 @@ func TestMenuHTML(t *testing.T) {
 		},
 	}
 
-	ul := NewUL(shared.Class("menu-open"), shared.Class("menu-active"), shared.Class("menu-sub"))
+	ul := NewUL(types.Class("menu-open"), types.Class("menu-active"), types.Class("menu-sub"))
 
 	// allows to mount a menu that was made in a different way
 	subA := m.FindByPath("$sub_a")

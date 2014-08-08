@@ -1,7 +1,7 @@
 package selector
 
 import (
-	. "github.com/go-on/lib/internal/shared"
+	. "github.com/go-on/lib/types"
 	"testing"
 )
 

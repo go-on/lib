@@ -7,8 +7,8 @@ import (
 	"net/http"
 
 	. "github.com/go-on/lib/html/internal/element"
-	"github.com/go-on/lib/internal/shared"
 	"github.com/go-on/lib/internal/template"
+	"github.com/go-on/lib/types"
 	"github.com/go-on/wrap"
 )
 
@@ -34,7 +34,7 @@ func NewDocType(doctype string, objects ...interface{}) *DocType {
 }
 
 func docTypeXml(doctypeString string, objects ...interface{}) (d *DocType) {
-	objects = append(objects, shared.Attribute{"xmlns", "http://www.w3.org/1999/xhtml"})
+	objects = append(objects, types.Attribute{"xmlns", "http://www.w3.org/1999/xhtml"})
 	return NewDocType(doctypeString, objects...)
 }
 

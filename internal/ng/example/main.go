@@ -4,7 +4,7 @@ import (
 	"fmt"
 	// "github.com/metakeule/goh4"
 	. "github.com/go-on/lib/html"
-	. "github.com/go-on/lib/internal/shared"
+	. "github.com/go-on/lib/types"
 	// . "github.com/go-on/html/tag"
 	// . "github.com/metakeule/goh4/tag/short"
 	"github.com/go-on/lib/internal/ng"

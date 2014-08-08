@@ -1,9 +1,10 @@
 package match
 
 import (
-	. "github.com/go-on/lib/html/internal/element"
-	"github.com/go-on/lib/internal/shared"
 	"testing"
+
+	. "github.com/go-on/lib/html/internal/element"
+	"github.com/go-on/lib/types"
 )
 
 func err(t *testing.T, msg string, is interface{}, shouldbe interface{}) {
@@ -42,7 +43,7 @@ func TestFieldMatcher(t *testing.T) {
 }
 
 func TestClassMatcher(t *testing.T) {
-	c := shared.Class("fine")
+	c := types.Class("fine")
 	a1 := NewElement("a")
 	a1.Add(c)
 	if !New(c).Matches(a1) {
@@ -55,7 +56,7 @@ func TestClassMatcher(t *testing.T) {
 }
 
 func TestNotMatcher(t *testing.T) {
-	cl := shared.Class("fine")
+	cl := types.Class("fine")
 	c := Not(New(cl))
 	a1 := NewElement("a")
 	a1.Add(cl)
@@ -69,7 +70,7 @@ func TestNotMatcher(t *testing.T) {
 }
 
 func TestIdMatcher(t *testing.T) {
-	i := shared.Id("fine")
+	i := types.Id("fine")
 	a1 := NewElement("a")
 	a1.Add(i)
 	if !New(i).Matches(a1) {
@@ -82,16 +83,16 @@ func TestIdMatcher(t *testing.T) {
 }
 
 func TestOrMatcher(t *testing.T) {
-	i := Or(New(shared.Id("fine")), New(shared.Class("well")))
+	i := Or(New(types.Id("fine")), New(types.Class("well")))
 	a1 := NewElement("a")
-	a1.Add(shared.Id("fine"))
+	a1.Add(types.Id("fine"))
 
 	if !i.Matches(a1) {
 		err(t, "incorrect or id matcher matches", false, true)
 	}
 
 	a2 := NewElement("a")
-	a2.Add(shared.Class("well"))
+	a2.Add(types.Class("well"))
 	if !i.Matches(a2) {
 		err(t, "incorrect or class matcher matches", false, true)
 	}
@@ -102,21 +103,21 @@ func TestOrMatcher(t *testing.T) {
 }
 
 func TestAndMatcher(t *testing.T) {
-	i := And(New(shared.Id("fine")), New(shared.Class("well")))
+	i := And(New(types.Id("fine")), New(types.Class("well")))
 	a1 := NewElement("a")
-	a1.Add(shared.Id("fine"), shared.Class("well"))
+	a1.Add(types.Id("fine"), types.Class("well"))
 
 	if !i.Matches(a1) {
 		err(t, "incorrect and matcher matches", false, true)
 	}
 	a2 := NewElement("a")
-	a2.Add(shared.Class("well"))
+	a2.Add(types.Class("well"))
 
 	if i.Matches(a2) {
 		err(t, "incorrect and  class matcher matches", true, false)
 	}
 	a3 := NewElement("a")
-	a3.Add(shared.Id("fine"))
+	a3.Add(types.Id("fine"))
 
 	if i.Matches(a3) {
 		err(t, "incorrect and id matcher matches", true, false)
@@ -124,7 +125,7 @@ func TestAndMatcher(t *testing.T) {
 }
 
 func TestTagMatcher(t *testing.T) {
-	m := shared.Tag("a")
+	m := types.Tag("a")
 	if !New(m).Matches(NewElement("a")) {
 		err(t, "incorrect tag matcher matches", false, true)
 	}
@@ -134,9 +135,9 @@ func TestTagMatcher(t *testing.T) {
 }
 
 func TestAttrMatcher(t *testing.T) {
-	m := shared.Attribute{"width", "200"}
+	m := types.Attribute{"width", "200"}
 	div1 := NewElement("div")
-	div1.Add(shared.Attribute{"width", "200"})
+	div1.Add(types.Attribute{"width", "200"})
 	if !New(m).Matches(div1) {
 		err(t, "incorrect Attr matcher matches", false, true)
 	}
@@ -186,7 +187,7 @@ func TestStylesMatcher(t *testing.T) {
 func TestHtmlMatcher(t *testing.T) {
 	a := NewElement("a")
 	a.Add("hiho")
-	m := shared.HTMLString(a.String())
+	m := types.HTMLString(a.String())
 	div := NewElement("div")
 	div.Add(a)
 	if !New(m).Matches(div) {

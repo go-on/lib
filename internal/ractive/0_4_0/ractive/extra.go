@@ -1,21 +1,21 @@
 package ractive
 
 import (
-	"github.com/go-on/lib/internal/shared"
+	"github.com/go-on/lib/types"
 )
 
-func Disabled_(val string) shared.Attribute {
-	return shared.Attribute{"disabled", val}
+func Disabled_(val string) types.Attribute {
+	return types.Attribute{"disabled", val}
 }
 
 type Event string
 
-func (e Event) OnClick(val string) shared.Attribute {
-	return shared.Attribute{"on-click", string(e) + ":" + val}
+func (e Event) OnClick(val string) types.Attribute {
+	return types.Attribute{"on-click", string(e) + ":" + val}
 }
 
-func (e Event) OnClickEval(val string) shared.Attribute {
-	return shared.Attribute{"on-click", string(e) + ":" + Eval(val)}
+func (e Event) OnClickEval(val string) types.Attribute {
+	return types.Attribute{"on-click", string(e) + ":" + Eval(val)}
 }
 
 func (e Event) Trigger(val string) TriggeredEvent {
@@ -47,12 +47,12 @@ var This = "."
 
 var ThisEval = Eval(".")
 
-func OnClick(events ...TriggeredEvent) shared.Attribute {
+func OnClick(events ...TriggeredEvent) types.Attribute {
 	str := ""
 
 	for _, ev := range events {
 		str += string(ev.Event) + ":" + ev.Value + ";"
 	}
 
-	return shared.Attribute{"on-click", str}
+	return types.Attribute{"on-click", str}
 }

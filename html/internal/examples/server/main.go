@@ -2,18 +2,19 @@ package main
 
 import (
 	"fmt"
-	. "github.com/go-on/lib/html"
-	"github.com/go-on/lib/html/internal/element/compiler"
-	"github.com/go-on/lib/internal/shared"
-	"github.com/go-on/lib/internal/shared/placeholder"
-	"github.com/metakeule/fmtdate"
 	"net/http"
 	"time"
+
+	. "github.com/go-on/lib/html"
+	"github.com/go-on/lib/html/internal/element/compiler"
+	"github.com/go-on/lib/types"
+	"github.com/go-on/lib/types/placeholder"
+	"github.com/metakeule/fmtdate"
 )
 
 var (
-	_firstname_ = placeholder.New(shared.Text("firstname"))
-	_lastname_  = placeholder.New(shared.Text("lastname"))
+	_firstname_ = placeholder.New(types.Text("firstname"))
+	_lastname_  = placeholder.New(types.Text("lastname"))
 	person      = LI(_firstname_, " ", _lastname_).Template("person")
 	links       = DIV(AHref("/", "simple"), E_nbsp, AHref("/optimized", "optimized"))
 )

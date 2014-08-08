@@ -1,7 +1,7 @@
 package ink2
 
 import (
-	html "github.com/go-on/lib/internal/shared"
+	html "github.com/go-on/lib/types"
 )
 
 var (

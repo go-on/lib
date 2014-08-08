@@ -1,4 +1,4 @@
-package shared
+package types
 
 /*
 	This should become the central place for reused interfaces within go-on

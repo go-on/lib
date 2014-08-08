@@ -1,13 +1,14 @@
 package menuhandler
 
 import (
-	"github.com/go-on/lib/internal/menu"
-	"github.com/go-on/lib/internal/menu/menuhtml"
-	"github.com/go-on/lib/internal/shared"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
+
+	"github.com/go-on/lib/internal/menu"
+	"github.com/go-on/lib/internal/menu/menuhtml"
+	"github.com/go-on/lib/types"
 )
 
 var m = &menu.Node{
@@ -35,7 +36,7 @@ var m = &menu.Node{
 	},
 }
 
-var ul = menuhtml.NewUL(shared.Class("menu-open"), shared.Class("menu-active"), shared.Class("menu-sub"))
+var ul = menuhtml.NewUL(types.Class("menu-open"), types.Class("menu-active"), types.Class("menu-sub"))
 
 func stripWhiteSpace(in string) string {
 	return strings.Replace(strings.Replace(strings.Replace(in, "\n", "", -1), "\t", "", -1), " ", "", -1)

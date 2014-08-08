@@ -2,7 +2,7 @@ package html
 
 import (
 	. "github.com/go-on/lib/html/internal/element"
-	"github.com/go-on/lib/internal/shared"
+	"github.com/go-on/lib/types"
 )
 
 func JsSrc(url string, objects ...interface{}) *Element {
@@ -121,7 +121,7 @@ func LabelFor(for_ string, objects ...interface{}) *Element {
 }
 
 func Charset(charset string, objects ...interface{}) *Element {
-	params := []interface{}{shared.Attribute{"charset", charset}}
+	params := []interface{}{types.Attribute{"charset", charset}}
 	return META(append(params, objects...)...)
 }
 
@@ -131,8 +131,8 @@ func CharsetUtf8(objects ...interface{}) *Element {
 
 func HttpEquiv(http_equiv string, content string, objects ...interface{}) *Element {
 	params := []interface{}{
-		shared.Attribute{"http-equiv", http_equiv},
-		shared.Attribute{"content", content},
+		types.Attribute{"http-equiv", http_equiv},
+		types.Attribute{"content", content},
 	}
 	return META(append(params, objects...)...)
 }
@@ -143,8 +143,8 @@ func HttpEquivUtf8(objects ...interface{}) *Element {
 
 func Viewport(content string, objects ...interface{}) *Element {
 	params := []interface{}{
-		shared.Attribute{"name", "viewport"},
-		shared.Attribute{"content", content},
+		types.Attribute{"name", "viewport"},
+		types.Attribute{"content", content},
 	}
 	return META(append(params, objects...)...)
 }

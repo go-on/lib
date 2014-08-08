@@ -10,14 +10,14 @@ import (
 	// "github.com/go-on/html/h"
 	"github.com/go-on/lib/internal/menu"
 	"github.com/go-on/lib/internal/menu/menuhtml"
-	"github.com/go-on/lib/internal/shared"
+	"github.com/go-on/lib/types"
 )
 
 type navMenu struct {
-	baseClass         shared.Class
+	baseClass         types.Class
 	dropDown          bool
 	dataToggleTab     bool
-	additionalClasses []shared.Class
+	additionalClasses []types.Class
 }
 
 func (n navMenu) Item(path, text string, isActive, hasChildren bool, depth int) *element.Element {
@@ -33,7 +33,7 @@ func (n navMenu) Item(path, text string, isActive, hasChildren bool, depth int) 
 			if hasChildren && depth < 2 {
 				// fmt.Printf("hasChildren: %v\n", hasChildren)
 				link.Add(SPAN(bs3.Caret))
-				link.Add(bs3.Dropdown_toggle, shared.Attribute{"data-toggle", "dropdown"})
+				link.Add(bs3.Dropdown_toggle, types.Attribute{"data-toggle", "dropdown"})
 			}
 		} else {
 			link = AHref(path, text)
@@ -43,7 +43,7 @@ func (n navMenu) Item(path, text string, isActive, hasChildren bool, depth int) 
 		e.Add(bs3.Divider)
 	} else {
 		if n.dataToggleTab {
-			link.Add(shared.Attribute{"data-toggle", "tab"})
+			link.Add(types.Attribute{"data-toggle", "tab"})
 		}
 		e.Add(link)
 	}
@@ -69,8 +69,8 @@ func (n navMenu) List(depth int, text string) *element.Element {
 	return e
 }
 
-func (n navMenu) ClassOpen() shared.Class {
-	return shared.Class("active")
+func (n navMenu) ClassOpen() types.Class {
+	return types.Class("active")
 }
 
 type navDropdown struct{}
@@ -103,8 +103,8 @@ func (n navDropdown) List(depth int, text string) *element.Element {
 	return e
 }
 
-func (n navDropdown) ClassOpen() shared.Class {
-	return shared.Class("active")
+func (n navDropdown) ClassOpen() types.Class {
+	return types.Class("active")
 }
 
 func Dropdown() menu.WriterTo {
@@ -112,7 +112,7 @@ func Dropdown() menu.WriterTo {
 }
 
 type navDropdownBtn struct {
-	baseClass    shared.Class
+	baseClass    types.Class
 	fallbackText string
 	textFormat   string
 }
@@ -146,18 +146,18 @@ func (n navDropdownBtn) WriterTo(root *menu.Node, depth int, path string) io.Wri
 		bs3.Btn, bs3.Dropdown_toggle,
 		n.baseClass,
 		// bs3.bs3.Disabled,
-		shared.Attribute{"data-toggle", "dropdown"},
-		shared.Attribute{"type", "button"},
+		types.Attribute{"data-toggle", "dropdown"},
+		types.Attribute{"type", "button"},
 		text+" ", SPAN(bs3.Caret),
 	)
 
 }
 
-func DropdownButton(btnClass shared.Class, textformat, fallbacktext string) menu.WriterTo {
+func DropdownButton(btnClass types.Class, textformat, fallbacktext string) menu.WriterTo {
 	return navDropdownBtn{btnClass, fallbacktext, textformat}
 }
 
-func Button(btnClass shared.Class, textformat, fallbacktext string) menu.WriterTo {
+func Button(btnClass types.Class, textformat, fallbacktext string) menu.WriterTo {
 	return navBtn{btnClass, fallbacktext, textformat}
 }
 
@@ -211,7 +211,7 @@ func Breadcrumb() breadcrumb {
 }
 
 type navBtn struct {
-	baseClass    shared.Class
+	baseClass    types.Class
 	fallbackText string
 	textFormat   string
 }
@@ -265,21 +265,21 @@ func (n navBtn) WriterTo(root *menu.Node, depth int, path string) io.WriterTo {
 		bs3.Btn,
 		n.baseClass,
 		// bs3.bs3.Disabled,
-		shared.Attribute{"type", "button"},
+		types.Attribute{"type", "button"},
 		text,
 	)
 
 }
 
-func Tabs(dropDown bool, datatoggle bool, classes ...shared.Class) menu.WriterTo {
+func Tabs(dropDown bool, datatoggle bool, classes ...types.Class) menu.WriterTo {
 	return menuhtml.New(navMenu{bs3.Nav_tabs, dropDown, datatoggle, classes})
 }
 
-func Pills(dropDown bool, classes ...shared.Class) menu.WriterTo {
+func Pills(dropDown bool, classes ...types.Class) menu.WriterTo {
 	return menuhtml.New(navMenu{bs3.Nav_pills, dropDown, false, classes})
 }
 
-func NavBar(classes ...shared.Class) menu.WriterTo {
+func NavBar(classes ...types.Class) menu.WriterTo {
 	return menuhtml.New(navMenu{bs3.Navbar_nav, true, false, classes})
 }
 

@@ -7,7 +7,7 @@ import (
 	"time"
 
 	. "github.com/go-on/lib/html"
-	. "github.com/go-on/lib/internal/shared"
+	. "github.com/go-on/lib/types"
 )
 
 func path(rw http.ResponseWriter, req *http.Request) {
