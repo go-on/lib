@@ -292,6 +292,11 @@ func lexTagAttributes(l *lexer) stateFn {
 			return lexBracketClosed
 		}
 
+		if strings.HasPrefix(l.input[l.pos:], string(slash)+string(bracketClosed)) {
+			l.next()
+			return lexBracketClosed
+		}
+
 		switch r := l.next(); {
 		case r == eof:
 			return l.errorf("unclosed tag")
