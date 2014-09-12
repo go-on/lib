@@ -97,9 +97,9 @@ func (p *parser) printAttributes() {
 	if len(attrs) > 0 {
 		if p.StripPrefixes {
 			//fmt.Fprintf(p.buffer, "\nATTR(%#v, %#v),", p.lastAttributeKey, p.lastAttributeVal)
-			fmt.Fprintf(p.buffer, "Attrs(%s), ", strings.Join(attrs, ", "))
+			fmt.Fprintf(p.buffer, "Attrs_(%s), ", strings.Join(attrs, ", "))
 		} else {
-			fmt.Fprintf(p.buffer, "html.Attrs(%s),", strings.Join(attrs, ", "))
+			fmt.Fprintf(p.buffer, "html.Attrs_(%s),", strings.Join(attrs, ", "))
 		}
 	}
 
