@@ -65,7 +65,7 @@ func main() {
 			package class
 
 			import (
-         "github.com/go-on/html"
+         "github.com/go-on/lib/types"
 			)
 
 		  var (
@@ -73,7 +73,7 @@ func main() {
 			`)
 
 		for _, class := range parser.Classes {
-			fmt.Fprintf(&buf, "%s = html.Class(%#v)\n", transform(class), class)
+			fmt.Fprintf(&buf, "%s = types.Class(%#v)\n", transform(class), class)
 		}
 
 		buf.WriteString(`
@@ -96,7 +96,7 @@ func main() {
 			package id
 
 			import (
-         "github.com/go-on/html"
+         "github.com/go-on/lib/types"
 			)
 
 		  var (
@@ -104,7 +104,7 @@ func main() {
 			`)
 
 		for _, id := range parser.Ids {
-			fmt.Fprintf(&buf, "%s = html.Id(%#v)\n", transform(id), id)
+			fmt.Fprintf(&buf, "%s = types.Id(%#v)\n", transform(id), id)
 		}
 
 		buf.WriteString(`
@@ -127,9 +127,9 @@ func main() {
 
 	import (
 		 "fmt"
-	   . "github.com/go-on/html"
-	   . "github.com/go-on/html/tag"
-	   . "github.com/go-on/html/entity"
+		. "github.com/go-on/lib/types"
+		. "github.com/go-on/lib/html"
+		. "github.com/go-on/lib/html/internal/element"	   
 	)
 
 	var (
