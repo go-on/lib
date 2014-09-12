@@ -2,6 +2,7 @@ package html
 
 import (
 	"fmt"
+
 	. "github.com/go-on/lib/html/internal/element"
 )
 
@@ -601,7 +602,7 @@ func STRONG(objects ...interface{}) (t *Element) {
 }
 
 func STYLE(objects ...interface{}) (t *Element) {
-	t = NewElement("style", IdForbidden, ClassForbidden, Invisible)
+	t = NewElement("style", IdForbidden, ClassForbidden, Invisible, WithoutEscaping)
 	// t.ParentTags = []Tag{"head", "body"}
 	t.Add(objects...)
 	return
