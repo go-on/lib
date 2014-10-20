@@ -9,7 +9,7 @@ import (
 	ht "github.com/go-on/lib/html"
 	"github.com/go-on/lib/html/internal/element"
 	"github.com/go-on/lib/internal/replacer"
-	"github.com/go-on/wrap"
+	"github.com/go-on/stack/responsewriter"
 )
 
 type templateDispatcher struct {
@@ -45,7 +45,7 @@ func (tw *templateDispatcher) ServeHTTP(w http.ResponseWriter, req *http.Request
 			case "text":
 				m.Call([]reflect.Value{
 					state,
-					reflect.ValueOf(&wrap.EscapeHTML{w}),
+					reflect.ValueOf(responsewriter.NewEscapeHTML(w)),
 					reflect.ValueOf(req),
 				})
 				continue

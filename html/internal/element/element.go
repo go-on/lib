@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/go-on/wrap"
+	"github.com/go-on/stack/responsewriter"
 
 	"github.com/go-on/builtin"
 	"github.com/go-on/lib/internal/template"
@@ -282,14 +282,14 @@ func (ø *Element) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	Post(ø, w)
 }
 
-func serveInner(ø *Element, w http.ResponseWriter, r *http.Request) (outer *wrap.Buffer) {
-	outer = wrap.NewBuffer(w)
+func serveInner(ø *Element, w http.ResponseWriter, r *http.Request) (outer *responsewriter.Buffer) {
+	outer = responsewriter.NewBuffer(w)
 	for _, in := range ø.Children {
 
 		switch ch := in.(type) {
 		//case *Element:
 		case http.Handler:
-			buf := wrap.NewBuffer(outer)
+			buf := responsewriter.NewBuffer(outer)
 			ch.ServeHTTP(buf, r)
 
 			switch buf.Code {
