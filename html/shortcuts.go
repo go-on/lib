@@ -148,3 +148,11 @@ func Viewport(content string, objects ...interface{}) *Element {
 	}
 	return META(append(params, objects...)...)
 }
+
+func Canonical(url string, objects ...interface{}) *Element {
+	params := []interface{}{
+		Rel_("canonical"),
+		Href_(url),
+	}
+	return LINK(append(params, objects...)...)
+}
