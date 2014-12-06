@@ -163,6 +163,9 @@ func (ø *Element) Tag() string  { return ø.tag }
 //func (ø *Element) Add(objects ...interface{}) ElementLike {
 func (ø *Element) Add(objects ...interface{}) {
 	for _, o := range objects {
+		if o == nil {
+			continue
+		}
 		switch v := o.(type) {
 		/*
 			case template.PlaceholderHandler:
