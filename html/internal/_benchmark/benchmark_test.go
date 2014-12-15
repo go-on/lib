@@ -2,7 +2,7 @@ package benchmark
 
 import (
 	"bytes"
-	"github.com/go-on/builtin"
+	"gopkg.in/go-on/builtin.v1"
 	"github.com/go-on/lib/html/internal/element"
 	"github.com/go-on/lib/html/internal/element/compiler"
 	"github.com/go-on/lib/internal/template/placeholder"

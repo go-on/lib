@@ -2,7 +2,7 @@ package placeholder
 
 import (
 	"fmt"
-	. "github.com/go-on/builtin"
+	. "gopkg.in/go-on/builtin.v1"
 	"github.com/go-on/lib/internal/replacer"
 
 	// . "github.com/go-on/lib/internal/shared"

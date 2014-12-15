@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/go-on/wrap"
+	"gopkg.in/go-on/wrap.v2"
 
-	"github.com/go-on/builtin"
+	"gopkg.in/go-on/builtin.v1"
 	"github.com/go-on/lib/internal/template"
 	"github.com/go-on/lib/types"
 	"github.com/go-on/lib/types/placeholder"

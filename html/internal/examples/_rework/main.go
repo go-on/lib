@@ -5,7 +5,7 @@ import (
 	. "github.com/go-on/lib/html"
 	"github.com/go-on/lib/html/internal/element/compiler"
 
-	// "github.com/go-on/wrap"
+	// "gopkg.in/go-on/wrap.v2"
 	"net/http"
 )
 

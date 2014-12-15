@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 
-	"github.com/go-on/cdncache"
+	"gopkg.in/go-on/cdncache.v1"
 	. "github.com/go-on/lib/html"
 	"github.com/go-on/lib/internal/bootstrap/bs3"
 	"github.com/go-on/lib/internal/bootstrap/bs3/bs3menu"

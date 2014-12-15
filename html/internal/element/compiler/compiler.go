@@ -9,7 +9,7 @@ import (
 	ht "github.com/go-on/lib/html"
 	"github.com/go-on/lib/html/internal/element"
 	"github.com/go-on/lib/internal/replacer"
-	"github.com/go-on/wrap"
+	"gopkg.in/go-on/wrap.v2"
 )
 
 type templateDispatcher struct {

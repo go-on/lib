@@ -22,9 +22,9 @@ import (
 	"github.com/go-on/lib/internal/pseudodb/pseudoroutes"
 
 	"github.com/go-contrib/uuid"
-	// "github.com/go-on/router"
-	"github.com/go-on/router"
-	"github.com/go-on/router/route"
+	// "gopkg.in/go-on/router.v2"
+	"gopkg.in/go-on/router.v2"
+	"gopkg.in/go-on/router.v2/route"
 )
 
 /*

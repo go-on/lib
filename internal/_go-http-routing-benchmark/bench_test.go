@@ -13,7 +13,7 @@ import (
 
 	"github.com/bmizerany/pat"
 	"github.com/codegangsta/martini"
-	goon "github.com/go-on/router"
+	goon "gopkg.in/go-on/router.v2"
 	"github.com/gocraft/web"
 	"github.com/gorilla/mux"
 	"github.com/julienschmidt/httprouter"
