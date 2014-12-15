@@ -3,8 +3,8 @@ package compiler
 import (
 	"bytes"
 	"fmt"
-	"github.com/go-on/lib/html/internal/element"
-	"github.com/go-on/lib/internal/replacer"
+	"gopkg.in/go-on/lib.v2/html/internal/element"
+	"gopkg.in/go-on/lib.v2/internal/replacer"
 	"net/http"
 )
 

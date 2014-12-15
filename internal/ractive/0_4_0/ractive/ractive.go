@@ -1,7 +1,7 @@
 package ractive
 
 import (
-	"github.com/go-on/lib/internal/promise"
+	"gopkg.in/go-on/lib.v2/internal/promise"
 	"github.com/gopherjs/gopherjs/js"
 )
 

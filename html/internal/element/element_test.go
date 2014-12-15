@@ -3,7 +3,7 @@ package element
 import (
 	"bytes"
 	"fmt"
-	types "github.com/go-on/lib/types"
+	types "gopkg.in/go-on/lib.v2/types"
 	"net/http"
 	"net/http/httptest"
 	"testing"

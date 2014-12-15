@@ -3,11 +3,11 @@ package template
 import (
 	"bytes"
 	"fmt"
-	"github.com/go-on/lib/internal/template/placeholder"
+	"gopkg.in/go-on/lib.v2/internal/template/placeholder"
 	"io"
 	"net/http"
 
-	"github.com/go-on/lib/internal/replacer"
+	"gopkg.in/go-on/lib.v2/internal/replacer"
 )
 
 type (

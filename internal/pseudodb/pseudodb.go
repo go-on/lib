@@ -19,7 +19,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/go-on/lib/internal/pseudodb/pseudoroutes"
+	"gopkg.in/go-on/lib.v2/internal/pseudodb/pseudoroutes"
 
 	"github.com/go-contrib/uuid"
 	// "gopkg.in/go-on/router.v2"

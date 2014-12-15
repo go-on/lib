@@ -4,9 +4,9 @@ import (
 
 	// "fmt"
 
-	. "github.com/go-on/lib/html"
-	. "github.com/go-on/lib/internal/selector"
-	. "github.com/go-on/lib/types"
+	. "gopkg.in/go-on/lib.v2/html"
+	. "gopkg.in/go-on/lib.v2/internal/selector"
+	. "gopkg.in/go-on/lib.v2/types"
 	// . "github.com/go-on/html/tag"
 	"testing"
 )

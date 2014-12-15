@@ -1,7 +1,7 @@
 package menuhandler
 
 import (
-	"github.com/go-on/lib/internal/menu"
+	"gopkg.in/go-on/lib.v2/internal/menu"
 	"net/http"
 )
 

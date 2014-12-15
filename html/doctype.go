@@ -6,9 +6,9 @@ import (
 	"io"
 	"net/http"
 
-	. "github.com/go-on/lib/html/internal/element"
-	"github.com/go-on/lib/internal/template"
-	"github.com/go-on/lib/types"
+	. "gopkg.in/go-on/lib.v2/html/internal/element"
+	"gopkg.in/go-on/lib.v2/internal/template"
+	"gopkg.in/go-on/lib.v2/types"
 	"gopkg.in/go-on/wrap.v2"
 )
 

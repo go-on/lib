@@ -3,14 +3,14 @@ package benchmark
 import (
 	"bytes"
 	"gopkg.in/go-on/builtin.v1"
-	"github.com/go-on/lib/html/internal/element"
-	"github.com/go-on/lib/html/internal/element/compiler"
-	"github.com/go-on/lib/internal/template/placeholder"
+	"gopkg.in/go-on/lib.v2/html/internal/element"
+	"gopkg.in/go-on/lib.v2/html/internal/element/compiler"
+	"gopkg.in/go-on/lib.v2/internal/template/placeholder"
 
-	. "github.com/go-on/lib/html"
-	"github.com/go-on/lib/internal/template"
-	"github.com/go-on/lib/types"
-	ph "github.com/go-on/lib/types/placeholder"
+	. "gopkg.in/go-on/lib.v2/html"
+	"gopkg.in/go-on/lib.v2/internal/template"
+	"gopkg.in/go-on/lib.v2/types"
+	ph "gopkg.in/go-on/lib.v2/types/placeholder"
 	tt "html/template"
 	"testing"
 )

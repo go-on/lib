@@ -3,10 +3,10 @@ package templfat
 import (
 	"reflect"
 
-	"github.com/go-on/lib/internal/fat"
-	"github.com/go-on/lib/internal/meta"
-	"github.com/go-on/lib/internal/template"
-	"github.com/go-on/lib/internal/template/placeholder"
+	"gopkg.in/go-on/lib.v2/internal/fat"
+	"gopkg.in/go-on/lib.v2/internal/meta"
+	"gopkg.in/go-on/lib.v2/internal/template"
+	"gopkg.in/go-on/lib.v2/internal/template/placeholder"
 )
 
 /*

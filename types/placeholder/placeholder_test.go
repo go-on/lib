@@ -1,7 +1,7 @@
 package placeholder
 
 import (
-	. "github.com/go-on/lib/types"
+	. "gopkg.in/go-on/lib.v2/types"
 	// "fmt"
 	"testing"
 )

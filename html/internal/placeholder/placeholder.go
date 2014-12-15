@@ -3,12 +3,12 @@ package placeholder
 import (
 	"fmt"
 	. "gopkg.in/go-on/builtin.v1"
-	"github.com/go-on/lib/internal/replacer"
+	"gopkg.in/go-on/lib.v2/internal/replacer"
 
-	// . "github.com/go-on/lib/internal/shared"
+	// . "gopkg.in/go-on/lib.v2/internal/shared"
 
-	// ph2 "github.com/go-on/lib/internal/shared/placeholder"
-	ph "github.com/go-on/lib/internal/template/placeholder"
+	// ph2 "gopkg.in/go-on/lib.v2/internal/shared/placeholder"
+	ph "gopkg.in/go-on/lib.v2/internal/template/placeholder"
 	"html"
 	// "net/http"
 	"net/url"
@@ -19,7 +19,7 @@ import (
 	// "strings"
 	// "time"
 
-	"github.com/go-on/lib/internal/template"
+	"gopkg.in/go-on/lib.v2/internal/template"
 )
 
 var Escaper = template.Escaper{

@@ -8,9 +8,9 @@ import (
 	"gopkg.in/go-on/wrap.v2"
 
 	"gopkg.in/go-on/builtin.v1"
-	"github.com/go-on/lib/internal/template"
-	"github.com/go-on/lib/types"
-	"github.com/go-on/lib/types/placeholder"
+	"gopkg.in/go-on/lib.v2/internal/template"
+	"gopkg.in/go-on/lib.v2/types"
+	"gopkg.in/go-on/lib.v2/types/placeholder"
 
 	// "github.com/go-on/replacer"
 

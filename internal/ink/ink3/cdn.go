@@ -3,9 +3,9 @@ package ink3
 import (
 	"fmt"
 
-	"github.com/go-on/lib/html"
-	"github.com/go-on/lib/html/internal/element"
-	"github.com/go-on/lib/types"
+	"gopkg.in/go-on/lib.v2/html"
+	"gopkg.in/go-on/lib.v2/html/internal/element"
+	"gopkg.in/go-on/lib.v2/types"
 )
 
 var V3_0_5 = CDN(3, 0, 5)

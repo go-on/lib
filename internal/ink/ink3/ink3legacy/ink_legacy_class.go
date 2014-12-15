@@ -1,7 +1,7 @@
 package ink3legacy
 
 import (
-	html "github.com/go-on/lib/types"
+	html "gopkg.in/go-on/lib.v2/types"
 )
 
 var (

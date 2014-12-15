@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	. "github.com/go-on/lib/html"
-	. "github.com/go-on/lib/html/internal/htmlfat"
-	"github.com/go-on/lib/internal/fat"
+	. "gopkg.in/go-on/lib.v2/html"
+	. "gopkg.in/go-on/lib.v2/html/internal/htmlfat"
+	"gopkg.in/go-on/lib.v2/internal/fat"
 )
 
 type Person struct {

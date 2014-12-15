@@ -1,9 +1,9 @@
 package ractivehtml
 
 import (
-	"github.com/go-on/lib/html"
-	"github.com/go-on/lib/html/internal/element"
-	"github.com/go-on/lib/types"
+	"gopkg.in/go-on/lib.v2/html"
+	"gopkg.in/go-on/lib.v2/html/internal/element"
+	"gopkg.in/go-on/lib.v2/types"
 )
 
 func context(name string, inner ...interface{}) *element.Element {
