@@ -21,7 +21,7 @@ import (
 
 	"gopkg.in/go-on/lib.v2/internal/pseudodb/pseudoroutes"
 
-	"github.com/go-contrib/uuid"
+	"gopkg.in/go-on/go.uuid.v1"
 	// "gopkg.in/go-on/router.v2"
 	"gopkg.in/go-on/router.v2"
 	"gopkg.in/go-on/router.v2/route"
