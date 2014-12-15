@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/go-on/replacer"
-	"github.com/metakeule/fmtdate"
+	"gopkg.in/metakeule/fmtdate.v1"
 )
 
 var (

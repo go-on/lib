@@ -7,7 +7,7 @@ import (
 	"github.com/go-on/fat"
 	"github.com/go-on/template"
 	"github.com/go-on/template/templfat"
-	"github.com/metakeule/fmtdate"
+	"gopkg.in/metakeule/fmtdate.v1"
 )
 
 type (
