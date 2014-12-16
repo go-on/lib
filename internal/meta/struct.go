@@ -97,3 +97,15 @@ func (s *Struct) EachTag(tagKey string, fn func(field *Field, tagVal string)) {
 	}
 	s.Each(f)
 }
+
+// returns a struct tag for a field
+func (s *Struct) Tag(field string) (*reflect.StructTag, error) {
+	if !(s.Value.Kind() == reflect.Struct) {
+		return nil, fmt.Errorf("%T is not a struct", s)
+	}
+	f, exists := s.Value.Type().FieldByName(field)
+	if !exists {
+		return nil, fmt.Errorf("field %s does not exist in %s", field, s.Value.Interface())
+	}
+	return &f.Tag, nil
+}
