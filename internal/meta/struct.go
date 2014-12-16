@@ -109,3 +109,23 @@ func (s *Struct) Tag(field string) (*reflect.StructTag, error) {
 	}
 	return &f.Tag, nil
 }
+
+// returns all struct tags
+func (s *Struct) Tags() (tags map[string]*reflect.StructTag, err error) {
+	tags = map[string]*reflect.StructTag{}
+
+	// ft := ø.FinalType(s)
+	if !(s.Value.Kind() == reflect.Struct) {
+		// Panicf("%s is not a struct / pointer to a struct", Inspect(s))
+		return nil, fmt.Errorf("%s is not a struct / pointer to a struct", s.Value.Interface())
+	}
+	//elem := ft.NumField()
+	elem := s.Value.NumField()
+	for i := 0; i < elem; i++ {
+		f := s.Value.Type().Field(i)
+		if string(f.Tag) != "" {
+			tags[f.Name] = &f.Tag
+		}
+	}
+	return
+}
