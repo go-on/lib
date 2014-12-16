@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	// "github.com/metakeule/goh4"
+	// "gopkg.in/metakeule/goh4.v5"
 	. "gopkg.in/go-on/lib.v2/html"
 	. "gopkg.in/go-on/lib.v2/types"
-	// . "github.com/go-on/html/tag"
-	// . "github.com/metakeule/goh4/tag/short"
+	// . "gopkg.in/go-on/lib.v2/html/tag"
+	// . "gopkg.in/metakeule/goh4.v5/tag/short"
 	"gopkg.in/go-on/lib.v2/internal/ng"
 	// "strings"
 )

@@ -7,7 +7,7 @@ import (
 	. "gopkg.in/go-on/lib.v2/html"
 	. "gopkg.in/go-on/lib.v2/internal/selector"
 	. "gopkg.in/go-on/lib.v2/types"
-	// . "github.com/go-on/html/tag"
+	// . "gopkg.in/go-on/lib.v2/html/tag"
 	"testing"
 )
 

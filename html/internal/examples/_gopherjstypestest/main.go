@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/go-on/html/types"
+	"gopkg.in/go-on/lib.v2/html/types"
 )
 
 func main() {

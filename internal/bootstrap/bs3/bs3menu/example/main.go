@@ -8,8 +8,8 @@ import (
 	"gopkg.in/go-on/lib.v2/internal/bootstrap/bs3"
 	"gopkg.in/go-on/lib.v2/internal/bootstrap/bs3/bs3menu"
 	"gopkg.in/go-on/lib.v2/types"
-	// "github.com/go-on/html/h"
-	// . "github.com/go-on/html/tag"
+	// "gopkg.in/go-on/lib.v2/html/h"
+	// . "gopkg.in/go-on/lib.v2/html/tag"
 	"net/http"
 
 	"gopkg.in/go-on/lib.v2/internal/menu"

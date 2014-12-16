@@ -1,7 +1,7 @@
 package class
 
 import (
-	"github.com/go-on/html"
+	"gopkg.in/go-on/lib.v2/html"
 )
 
 var (

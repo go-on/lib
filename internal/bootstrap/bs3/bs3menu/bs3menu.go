@@ -7,7 +7,7 @@ import (
 	. "gopkg.in/go-on/lib.v2/html"
 	"gopkg.in/go-on/lib.v2/html/internal/element"
 	"gopkg.in/go-on/lib.v2/internal/bootstrap/bs3"
-	// "github.com/go-on/html/h"
+	// "gopkg.in/go-on/lib.v2/html/h"
 	"gopkg.in/go-on/lib.v2/internal/menu"
 	"gopkg.in/go-on/lib.v2/internal/menu/menuhtml"
 	"gopkg.in/go-on/lib.v2/types"

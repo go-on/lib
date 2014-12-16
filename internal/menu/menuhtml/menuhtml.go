@@ -4,8 +4,8 @@ import (
 	. "gopkg.in/go-on/lib.v2/html"
 	"gopkg.in/go-on/lib.v2/html/internal/element"
 	"gopkg.in/go-on/lib.v2/types"
-	// "github.com/go-on/html/h"
-	// "github.com/go-on/html/tag"
+	// "gopkg.in/go-on/lib.v2/html/h"
+	// "gopkg.in/go-on/lib.v2/html/tag"
 	"io"
 
 	"gopkg.in/go-on/lib.v2/internal/menu"

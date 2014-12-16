@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/go-on/html/tag"
+	"gopkg.in/go-on/lib.v2/html/tag"
 
 	. "github.com/go-on/bootstrap/bs3"
 )

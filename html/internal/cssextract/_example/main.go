@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/go-on/html/cssextract"
+	"gopkg.in/go-on/lib.v2/html/cssextract"
 )
 
 var styles = `

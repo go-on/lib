@@ -12,7 +12,7 @@ import (
 	. "gopkg.in/go-on/router.v2/internal/routerfat"
 	"gopkg.in/go-on/router.v2/route"
 	"gopkg.in/go-on/wrap.v2"
-	"github.com/go-on/wrap-contrib-testing/wrapstesting"
+	"gopkg.in/go-on/wrap-contrib-testing.v2/wrapstesting"
 	// . "gopkg.in/go-on/wrap-contrib.v2/wraps"
 	"net/http"
 	"sync"

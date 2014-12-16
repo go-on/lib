@@ -2,7 +2,7 @@ package fat
 
 import (
 	"fmt"
-	//"github.com/metakeule/meta"
+	//"gopkg.in/metakeule/meta.v5"
 	"gopkg.in/go-on/lib.v2/internal/meta"
 	"reflect"
 	"strings"

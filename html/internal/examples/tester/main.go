@@ -5,7 +5,7 @@ import (
 
 	. "gopkg.in/go-on/lib.v2/html"
 	"gopkg.in/go-on/lib.v2/html/internal/element"
-	// "github.com/go-on/html/tag"
+	// "gopkg.in/go-on/lib.v2/html/tag"
 )
 
 func main() {
