@@ -1,9 +1,0 @@
-{
-  "github.com/gopherjs/gopherjs/js": {
-    "VCM": "git",
-    "Rev": "59e5a84ac78d8d8320def25c8322c89daa8a0a2b",
-    "Parent": "github.com/go-on/bacon",
-    "Tag": "",
-    "RepoRoot": "github.com/gopherjs/gopherjs"
-  }
-}
