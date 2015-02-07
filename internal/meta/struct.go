@@ -142,6 +142,18 @@ func (s *Struct) Tags() (tags map[string]*reflect.StructTag, err error) {
 	return
 }
 
+func (s *Struct) ToPtrSlice(tag string, fields []string) []interface{} {
+	sl := newStructSlice(s, tag, fields)
+	sl.ToPtrSlice()
+	return sl.sl
+}
+
+func (s *Struct) ToPtrMap(tag string) map[string]interface{} {
+	sm := &structMap{s, tag, map[string]interface{}{}}
+	sm.ToPtrMap()
+	return sm.m
+}
+
 // ToMap converts a given struct to a map. If tag is not "", it follows the
 // same semantics as json encoding, but for the given tag.
 // Panics on errors
@@ -151,10 +163,137 @@ func (s *Struct) ToMap(tag string) map[string]interface{} {
 	return sm.m
 }
 
+type structSlice struct {
+	*Struct
+	tag string
+	// fields []string
+	fields map[string]int
+	sl     []interface{}
+	// pos    int
+}
+
+func newStructSlice(stru *Struct, tag string, fields []string) (s *structSlice) {
+	s = &structSlice{
+		Struct: stru,
+		sl:     make([]interface{}, len(fields)),
+		tag:    tag,
+		fields: make(map[string]int, len(fields)),
+	}
+
+	for pos, f := range fields {
+		s.fields[f] = pos
+	}
+	return
+}
+
+func (s *structSlice) ToPtrSlice() {
+	if s.tag == "" {
+		s.Each(s.setFieldPtr)
+		return
+	}
+	s.EachTagWithEmpty(s.tag, s.setTaggedFieldPtr)
+}
+
+func (s *structSlice) setFieldPtr(field *Field) {
+	if pos, found := s.fields[field.Type.Name]; found {
+		if !field.Value.CanAddr() {
+			panic("pointer can't be created for " + field.Value.String())
+		}
+		s.sl[pos] = field.Value.Addr().Interface()
+	}
+}
+
+func (s *structSlice) setTaggedFieldPtr(field *Field, tagVal string) {
+
+	if tagVal == "" {
+		// same as if tag == ""
+		s.setFieldPtr(field)
+		return
+	}
+
+	tvs := strings.Split(tagVal, ",")
+	fieldName := tvs[0]
+
+	var omitempty bool
+	if len(tvs) > 1 && tvs[1] == "omitempty" {
+		omitempty = true
+	}
+
+	// omit empty values as required by omitempty tag
+	if IsZero(*field.Value) && omitempty {
+		return
+	}
+
+	if fieldName == "" {
+		fieldName = field.Type.Name
+	}
+
+	if pos, found := s.fields[fieldName]; found {
+		if !field.Value.CanAddr() {
+			panic("pointer can't be created for " + field.Value.String())
+		}
+		s.sl[pos] = field.Value.Addr().Interface()
+	}
+}
+
 type structMap struct {
 	*Struct
 	tag string
 	m   map[string]interface{}
+}
+
+func (s *structMap) ToPtrMap() {
+	if s.tag == "" {
+		s.toMapPtrNotTagged()
+		return
+	}
+	s.toMapPtrTagged()
+}
+
+func (s *structMap) toMapPtrNotTagged() {
+	s.Each(s.setFieldPtr)
+}
+
+func (s *structMap) toMapPtrTagged() {
+	s.EachTagWithEmpty(s.tag, s.setTaggedFieldPtr)
+}
+
+func (s *structMap) setFieldPtr(field *Field) {
+	if !field.Value.CanAddr() {
+		panic("pointer can't be created for " + field.Value.String())
+	}
+	s.m[field.Type.Name] = field.Value.Addr().Interface()
+}
+
+func (s *structMap) setTaggedFieldPtr(field *Field, tagVal string) {
+
+	if tagVal == "" {
+		// same as if tag == ""
+		s.setFieldPtr(field)
+		return
+	}
+
+	tvs := strings.Split(tagVal, ",")
+	fieldName := tvs[0]
+
+	var omitempty bool
+	if len(tvs) > 1 && tvs[1] == "omitempty" {
+		omitempty = true
+	}
+
+	// omit empty values as required by omitempty tag
+	if IsZero(*field.Value) && omitempty {
+		return
+	}
+
+	if fieldName == "" {
+		fieldName = field.Type.Name
+	}
+
+	if !field.Value.CanAddr() {
+		panic("pointer can't be created for " + field.Value.String())
+	}
+	s.m[fieldName] = field.Value.Addr().Interface()
 }
 
 // toMap ignores the tag

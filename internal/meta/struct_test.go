@@ -18,6 +18,57 @@ func (x xx) String() string {
 	return string(x)
 }
 
+func TestToPtrSlice(t *testing.T) {
+	x := testStruct{}
+
+	stru, err := StructByValue(reflect.ValueOf(&x))
+
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	sl := stru.ToPtrSlice("testtag", []string{"S", "x"})
+
+	if len(sl) != 2 {
+		t.Errorf("len(sl) = %v // expected 2", len(sl))
+	}
+
+	*(sl[1].(*string)) = "a"
+
+	if x.A != "a" {
+		t.Errorf("wrong value for x.A: expected %#v, got %#v", "a", x.A)
+	}
+
+	*(sl[0].(*fmt.Stringer)) = xx("S")
+
+	if x.S.String() != "S" {
+		t.Errorf("wrong value for x.S.String(): expected %#v, got %#v", "S", x.S.String())
+	}
+}
+
+func TestToPtrMap(t *testing.T) {
+	x := testStruct{}
+
+	stru, err := StructByValue(reflect.ValueOf(&x))
+
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+	m := stru.ToPtrMap("testtag")
+
+	*(m["x"].(*string)) = "a"
+
+	if x.A != "a" {
+		t.Errorf("wrong value for x.A: expected %#v, got %#v", "a", x.A)
+	}
+
+	*(m["S"].(*fmt.Stringer)) = xx("S")
+
+	if x.S.String() != "S" {
+		t.Errorf("wrong value for x.S.String(): expected %#v, got %#v", "S", x.S.String())
+	}
+}
+
 func TestToMap(t *testing.T) {
 	var x = struct {
 		A string `testtag:"a"`
