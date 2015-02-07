@@ -1,7 +1,7 @@
 package placeholder
 
 import (
-	. "gopkg.in/go-on/lib.v2/types"
+	. "gopkg.in/go-on/lib.v3/types"
 	// "fmt"
 	"testing"
 )

@@ -6,8 +6,8 @@ import (
 	"io"
 
 	"gopkg.in/go-on/builtin.v1"
-	"gopkg.in/go-on/lib.v2/types"
-	"gopkg.in/go-on/lib.v2/types/placeholder"
+	"gopkg.in/go-on/lib.v3/types"
+	"gopkg.in/go-on/lib.v3/types/placeholder"
 )
 
 type htmlerstring struct {

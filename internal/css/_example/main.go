@@ -5,8 +5,8 @@ import (
 	. "github.com/go-on/css"
 	. "github.com/go-on/css/c"
 	. "github.com/go-on/css/color"
-	. "gopkg.in/go-on/lib.v2/html"
-	. "gopkg.in/go-on/lib.v2/html/tag"
+	. "gopkg.in/go-on/lib.v3/html"
+	. "gopkg.in/go-on/lib.v3/html/tag"
 )
 
 var bestClass = Class("best")

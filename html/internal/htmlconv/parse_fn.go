@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	// tag "gopkg.in/go-on/lib.v2/html"
-	tagProps "gopkg.in/go-on/lib.v2/html/internal/tagproperties"
-	//ht "gopkg.in/go-on/lib.v2/html/internal/element"
+	// tag "gopkg.in/go-on/lib.v3/html"
+	tagProps "gopkg.in/go-on/lib.v3/html/internal/tagproperties"
+	//ht "gopkg.in/go-on/lib.v3/html/internal/element"
 )
 
 func parseBracketClose(p *parser) parseFn {

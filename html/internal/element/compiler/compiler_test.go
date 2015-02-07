@@ -2,7 +2,7 @@ package compiler
 
 import (
 	"fmt"
-	. "gopkg.in/go-on/lib.v2/html"
+	. "gopkg.in/go-on/lib.v3/html"
 	"net/http"
 	"net/http/httptest"
 	"strings"

@@ -3,7 +3,7 @@ package template
 import (
 	// "bytes"
 	"fmt"
-	"gopkg.in/go-on/lib.v2/internal/template/placeholder"
+	"gopkg.in/go-on/lib.v3/internal/template/placeholder"
 	"io"
 	// "net/http"
 	// "reflect"

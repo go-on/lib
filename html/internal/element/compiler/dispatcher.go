@@ -3,9 +3,9 @@ package compiler
 import (
 	"bytes"
 	"fmt"
-	ht "gopkg.in/go-on/lib.v2/html"
-	"gopkg.in/go-on/lib.v2/html/internal/element"
-	"gopkg.in/go-on/lib.v2/internal/replacer"
+	ht "gopkg.in/go-on/lib.v3/html"
+	"gopkg.in/go-on/lib.v3/html/internal/element"
+	"gopkg.in/go-on/lib.v3/internal/replacer"
 	"go/ast"
 	"net/http"
 	"reflect"

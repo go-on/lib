@@ -1,9 +1,9 @@
 package bs3field
 
 import (
-	. "gopkg.in/go-on/lib.v2/html"
-	. "gopkg.in/go-on/lib.v2/html/internal/element"
-	b "gopkg.in/go-on/lib.v2/internal/bootstrap/bs3"
+	. "gopkg.in/go-on/lib.v3/html"
+	. "gopkg.in/go-on/lib.v3/html/internal/element"
+	b "gopkg.in/go-on/lib.v3/internal/bootstrap/bs3"
 )
 
 type Field struct {

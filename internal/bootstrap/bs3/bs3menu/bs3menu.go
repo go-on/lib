@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"io"
 	// "fmt"
-	. "gopkg.in/go-on/lib.v2/html"
-	"gopkg.in/go-on/lib.v2/html/internal/element"
-	"gopkg.in/go-on/lib.v2/internal/bootstrap/bs3"
-	// "gopkg.in/go-on/lib.v2/html/h"
-	"gopkg.in/go-on/lib.v2/internal/menu"
-	"gopkg.in/go-on/lib.v2/internal/menu/menuhtml"
-	"gopkg.in/go-on/lib.v2/types"
+	. "gopkg.in/go-on/lib.v3/html"
+	"gopkg.in/go-on/lib.v3/html/internal/element"
+	"gopkg.in/go-on/lib.v3/internal/bootstrap/bs3"
+	// "gopkg.in/go-on/lib.v3/html/h"
+	"gopkg.in/go-on/lib.v3/internal/menu"
+	"gopkg.in/go-on/lib.v3/internal/menu/menuhtml"
+	"gopkg.in/go-on/lib.v3/types"
 )
 
 type navMenu struct {

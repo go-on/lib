@@ -1,8 +1,8 @@
 package seo
 
 import (
-	h "gopkg.in/go-on/lib.v2/html"
-	. "gopkg.in/go-on/lib.v2/types"
+	h "gopkg.in/go-on/lib.v3/html"
+	. "gopkg.in/go-on/lib.v3/types"
 )
 
 func DCSubject(content string, other ...interface{}) HTMLer {

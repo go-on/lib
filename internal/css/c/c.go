@@ -2,8 +2,8 @@ package c
 
 import (
 	"fmt"
-	// . "gopkg.in/go-on/lib.v2/html"
-	. "gopkg.in/go-on/lib.v2/types"
+	// . "gopkg.in/go-on/lib.v3/html"
+	. "gopkg.in/go-on/lib.v3/types"
 	"strings"
 )
 

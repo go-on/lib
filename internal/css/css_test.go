@@ -4,10 +4,10 @@ import (
 
 	// "fmt"
 
-	. "gopkg.in/go-on/lib.v2/html"
-	. "gopkg.in/go-on/lib.v2/internal/selector"
-	. "gopkg.in/go-on/lib.v2/types"
-	// . "gopkg.in/go-on/lib.v2/html/tag"
+	. "gopkg.in/go-on/lib.v3/html"
+	. "gopkg.in/go-on/lib.v3/internal/selector"
+	. "gopkg.in/go-on/lib.v3/types"
+	// . "gopkg.in/go-on/lib.v3/html/tag"
 	"testing"
 )
 

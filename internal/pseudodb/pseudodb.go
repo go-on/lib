@@ -19,7 +19,7 @@ import (
 	"strings"
 	"sync"
 
-	"gopkg.in/go-on/lib.v2/internal/pseudodb/pseudoroutes"
+	"gopkg.in/go-on/lib.v3/internal/pseudodb/pseudoroutes"
 
 	"gopkg.in/go-on/go.uuid.v1"
 	// "gopkg.in/go-on/router.v2"

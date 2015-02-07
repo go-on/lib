@@ -2,19 +2,19 @@ package htmlfat
 
 import (
 	"fmt"
-	"gopkg.in/go-on/lib.v2/internal/replacer"
-	"gopkg.in/go-on/lib.v2/internal/template/placeholder"
+	"gopkg.in/go-on/lib.v3/internal/replacer"
+	"gopkg.in/go-on/lib.v3/internal/template/placeholder"
 	"reflect"
 	"strings"
 	"sync"
 
-	ph "gopkg.in/go-on/lib.v2/html/internal/placeholder"
+	ph "gopkg.in/go-on/lib.v3/html/internal/placeholder"
 
-	//html "gopkg.in/go-on/lib.v2/html/internal/element"
-	"gopkg.in/go-on/lib.v2/internal/fat"
-	"gopkg.in/go-on/lib.v2/internal/meta"
-	// html "gopkg.in/go-on/lib.v2/internal/shared"
-	"gopkg.in/go-on/lib.v2/internal/template"
+	//html "gopkg.in/go-on/lib.v3/html/internal/element"
+	"gopkg.in/go-on/lib.v3/internal/fat"
+	"gopkg.in/go-on/lib.v3/internal/meta"
+	// html "gopkg.in/go-on/lib.v3/internal/shared"
+	"gopkg.in/go-on/lib.v3/internal/template"
 )
 
 /*

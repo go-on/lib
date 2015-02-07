@@ -7,8 +7,8 @@ import (
 	"os"
 	"strings"
 
-	"gopkg.in/go-on/lib.v2/html/internal/cssextract"
-	"gopkg.in/go-on/lib.v2/html/internal/htmlconv"
+	"gopkg.in/go-on/lib.v3/html/internal/cssextract"
+	"gopkg.in/go-on/lib.v3/html/internal/htmlconv"
 )
 
 func transform(classOrId string) string {
@@ -65,7 +65,7 @@ func main() {
 			package class
 
 			import (
-         "gopkg.in/go-on/lib.v2/types"
+         "gopkg.in/go-on/lib.v3/types"
 			)
 
 		  var (
@@ -96,7 +96,7 @@ func main() {
 			package id
 
 			import (
-         "gopkg.in/go-on/lib.v2/types"
+         "gopkg.in/go-on/lib.v3/types"
 			)
 
 		  var (
@@ -127,9 +127,9 @@ func main() {
 
 	import (
 		 "fmt"
-		. "gopkg.in/go-on/lib.v2/types"
-		. "gopkg.in/go-on/lib.v2/html"
-		. "gopkg.in/go-on/lib.v2/html/internal/element"	   
+		. "gopkg.in/go-on/lib.v3/types"
+		. "gopkg.in/go-on/lib.v3/html"
+		. "gopkg.in/go-on/lib.v3/html/internal/element"	   
 	)
 
 	var (

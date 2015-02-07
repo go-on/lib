@@ -4,16 +4,16 @@ import (
 	"encoding/json"
 
 	"gopkg.in/go-on/cdncache.v1"
-	. "gopkg.in/go-on/lib.v2/html"
-	"gopkg.in/go-on/lib.v2/internal/bootstrap/bs3"
-	"gopkg.in/go-on/lib.v2/internal/bootstrap/bs3/bs3menu"
-	"gopkg.in/go-on/lib.v2/types"
-	// "gopkg.in/go-on/lib.v2/html/h"
-	// . "gopkg.in/go-on/lib.v2/html/tag"
+	. "gopkg.in/go-on/lib.v3/html"
+	"gopkg.in/go-on/lib.v3/internal/bootstrap/bs3"
+	"gopkg.in/go-on/lib.v3/internal/bootstrap/bs3/bs3menu"
+	"gopkg.in/go-on/lib.v3/types"
+	// "gopkg.in/go-on/lib.v3/html/h"
+	// . "gopkg.in/go-on/lib.v3/html/tag"
 	"net/http"
 
-	"gopkg.in/go-on/lib.v2/internal/menu"
-	"gopkg.in/go-on/lib.v2/internal/menu/menuhandler"
+	"gopkg.in/go-on/lib.v3/internal/menu"
+	"gopkg.in/go-on/lib.v3/internal/menu/menuhandler"
 )
 
 var menuJson = `

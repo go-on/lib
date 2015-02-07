@@ -1,7 +1,7 @@
 package logic
 
 import (
-	. "gopkg.in/go-on/lib.v2/html/internal/element"
+	. "gopkg.in/go-on/lib.v3/html/internal/element"
 )
 
 func IF_(condition func() bool, ifData interface{}) interface{} {

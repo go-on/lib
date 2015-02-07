@@ -3,10 +3,10 @@ package main
 import (
 	"os"
 
-	. "gopkg.in/go-on/lib.v2/html"
-	"gopkg.in/go-on/lib.v2/html/internal/element"
-	. "gopkg.in/go-on/lib.v2/types"
-	"gopkg.in/go-on/lib.v2/types/placeholder"
+	. "gopkg.in/go-on/lib.v3/html"
+	"gopkg.in/go-on/lib.v3/html/internal/element"
+	. "gopkg.in/go-on/lib.v3/types"
+	"gopkg.in/go-on/lib.v3/types/placeholder"
 )
 
 var (

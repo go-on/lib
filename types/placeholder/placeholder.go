@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"reflect"
 
-	"gopkg.in/go-on/lib.v2/internal/replacer"
-	"gopkg.in/go-on/lib.v2/internal/template"
-	"gopkg.in/go-on/lib.v2/types"
+	"gopkg.in/go-on/lib.v3/internal/replacer"
+	"gopkg.in/go-on/lib.v3/internal/template"
+	"gopkg.in/go-on/lib.v3/types"
 
-	ph "gopkg.in/go-on/lib.v2/internal/template/placeholder"
+	ph "gopkg.in/go-on/lib.v3/internal/template/placeholder"
 )
 
 var (

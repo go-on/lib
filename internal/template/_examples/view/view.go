@@ -1,10 +1,10 @@
 package main
 
 import (
-	. "gopkg.in/go-on/lib.v2/html"
-	. "gopkg.in/go-on/lib.v2/html/attr"
-	. "gopkg.in/go-on/lib.v2/html/h"
-	. "gopkg.in/go-on/lib.v2/html/tag"
+	. "gopkg.in/go-on/lib.v3/html"
+	. "gopkg.in/go-on/lib.v3/html/attr"
+	. "gopkg.in/go-on/lib.v3/html/h"
+	. "gopkg.in/go-on/lib.v3/html/tag"
 	"github.com/go-on/template"
 	// "log"
 	"net/http"

@@ -1,7 +1,7 @@
 package template
 
 import (
-	"gopkg.in/go-on/lib.v2/internal/replacer"
+	"gopkg.in/go-on/lib.v3/internal/replacer"
 	"testing"
 )
 

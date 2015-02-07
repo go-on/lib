@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"gopkg.in/go-on/lib.v2/internal/menu"
-	"gopkg.in/go-on/lib.v2/internal/menu/menuhtml"
-	"gopkg.in/go-on/lib.v2/types"
+	"gopkg.in/go-on/lib.v3/internal/menu"
+	"gopkg.in/go-on/lib.v3/internal/menu/menuhtml"
+	"gopkg.in/go-on/lib.v3/types"
 )
 
 func main() {

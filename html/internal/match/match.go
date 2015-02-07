@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"gopkg.in/go-on/builtin.v1"
-	. "gopkg.in/go-on/lib.v2/html/internal/element"
-	"gopkg.in/go-on/lib.v2/types"
+	. "gopkg.in/go-on/lib.v3/html/internal/element"
+	"gopkg.in/go-on/lib.v3/types"
 )
 
 // something that matches an Element
