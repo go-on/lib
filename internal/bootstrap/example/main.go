@@ -17,6 +17,7 @@ func main() {
 
 	doc := bs.V3_1.New(Lang_("de"))
 	doc.AddToHead(TITLE("Just a test"))
+	doc.AddTheme()
 	doc.AddToBody(mkBody(mkMenu(menuJson)))
 
 	http.Handle("/", doc.DocType(cdncache.CDN("/cdn-cache/")))
