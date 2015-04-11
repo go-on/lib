@@ -15,20 +15,22 @@ import (
 
 func main() {
 
-	doc := bs3.V_3_1_1.Document(Lang_("de"))
-	doc.AddToHead(Title_("Just a test"))
+	doc := bs3.V3_1.Document(Lang_("de"))
+	doc.AddToHead(TITLE("Just a test"))
+	doc.AddToBody(mkBody(mkMenu(menuJson)))
 
-	m := &menu.Node{}
-
-	if err := json.Unmarshal([]byte(menuJson), &m); err != nil {
-		panic(err.Error())
-	}
-	doc.AddToBody(mkBody(m))
-
-	var cdn = cdncache.CDN("/cdn-cache/")
-	http.Handle("/", doc.DocType(cdn))
+	http.Handle("/", doc.DocType(cdncache.CDN("/cdn-cache/")))
 
 	http.ListenAndServe(":8080", nil)
+}
+
+func mkMenu(mjson string) *menu.Node {
+	m := &menu.Node{}
+
+	if err := json.Unmarshal([]byte(mjson), &m); err != nil {
+		panic(err.Error())
+	}
+	return m
 }
 
 func mkBody(m *menu.Node) *element.Element {

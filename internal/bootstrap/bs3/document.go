@@ -40,8 +40,8 @@ var html5shivMin = "//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"
 var respondMin = "//oss.maxcdn.com/respond/1.4.2/respond.min.js"
 var jqueryMin = "//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
 
-var V_3_3_4 = VERSION("3.3.4")
-var V_3_1_1 = VERSION("3.1.1")
+var V3_3 = VERSION("3.3.4")
+var V3_1 = VERSION("3.1.1")
 
 func (v VERSION) Head(cdnFn func(cdnURL string) string) *element.Element {
 	return element.Elements(
