@@ -6,6 +6,7 @@ import (
 	. "gopkg.in/go-on/lib.v3/html"
 	"gopkg.in/go-on/lib.v3/html/internal/element"
 	bs "gopkg.in/go-on/lib.v3/internal/bootstrap/bs3"
+	bscontainer "gopkg.in/go-on/lib.v3/internal/bootstrap/bs3/bs3container"
 	bsmenu "gopkg.in/go-on/lib.v3/internal/bootstrap/bs3/bs3menu"
 	"gopkg.in/go-on/lib.v3/internal/menu"
 	"gopkg.in/go-on/lib.v3/internal/menu/menuhandler"
@@ -39,8 +40,7 @@ func mkBody(m *menu.Node) *element.Element {
 		mkNav(m, 1),
 		mkBreadcrumb(m, 2),
 
-		DIV(
-			bs.Container_fluid,
+		bscontainer.Fluid(
 			DIV(bs.Col_sm_6, mkPanel("Dropdown Buttons", mkDropDownButtons(m))),
 			DIV(bs.Col_sm_3, mkPanel("Pills stacked @ 1-2", mkPills(m))),
 			DIV(bs.Col_sm_3, mkPanel("Listgroup @ 2", mkListGroup(m))),
