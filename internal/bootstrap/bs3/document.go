@@ -65,7 +65,7 @@ func (v VERSION) Body(cdnFn func(cdnURL string) string) *element.Element {
 	)
 }
 
-func (v VERSION) Document(htmlattrs ...interface{}) *document {
+func (v VERSION) New(htmlattrs ...interface{}) *document {
 	return newDocument(v, htmlattrs...)
 }
 

@@ -5,8 +5,8 @@ import (
 	"gopkg.in/go-on/cdncache.v1"
 	. "gopkg.in/go-on/lib.v3/html"
 	"gopkg.in/go-on/lib.v3/html/internal/element"
-	"gopkg.in/go-on/lib.v3/internal/bootstrap/bs3"
-	"gopkg.in/go-on/lib.v3/internal/bootstrap/bs3/bs3menu"
+	bs "gopkg.in/go-on/lib.v3/internal/bootstrap/bs3"
+	bsmenu "gopkg.in/go-on/lib.v3/internal/bootstrap/bs3/bs3menu"
 	"gopkg.in/go-on/lib.v3/internal/menu"
 	"gopkg.in/go-on/lib.v3/internal/menu/menuhandler"
 	"gopkg.in/go-on/lib.v3/types"
@@ -15,7 +15,7 @@ import (
 
 func main() {
 
-	doc := bs3.V3_1.Document(Lang_("de"))
+	doc := bs.V3_1.New(Lang_("de"))
 	doc.AddToHead(TITLE("Just a test"))
 	doc.AddToBody(mkBody(mkMenu(menuJson)))
 
@@ -39,75 +39,75 @@ func mkBody(m *menu.Node) *element.Element {
 		mkBreadcrumb(m, 2),
 
 		DIV(
-			bs3.Container_fluid,
-			DIV(bs3.Col_sm_6, mkPanel("Dropdown Buttons", mkDropDownButtons(m))),
-			DIV(bs3.Col_sm_3, mkPanel("Pills stacked @ 1-2", mkPills(m))),
-			DIV(bs3.Col_sm_3, mkPanel("Listgroup @ 2", mkListGroup(m))),
-			DIV(bs3.Col_sm_6, mkPanel("Tabs @ 2", mkTabNav(m), tabContent)),
+			bs.Container_fluid,
+			DIV(bs.Col_sm_6, mkPanel("Dropdown Buttons", mkDropDownButtons(m))),
+			DIV(bs.Col_sm_3, mkPanel("Pills stacked @ 1-2", mkPills(m))),
+			DIV(bs.Col_sm_3, mkPanel("Listgroup @ 2", mkListGroup(m))),
+			DIV(bs.Col_sm_6, mkPanel("Tabs @ 2", mkTabNav(m), tabContent)),
 		),
 	)
 }
 
 func mkPanel(title string, body ...interface{}) *element.Element {
-	return DIV(bs3.Panel, bs3.Panel_default,
-		DIV(bs3.Panel_heading, title),
-		DIV(bs3.Panel_body, element.Elements(body...)),
+	return DIV(bs.Panel, bs.Panel_default,
+		DIV(bs.Panel_heading, title),
+		DIV(bs.Panel_body, element.Elements(body...)),
 	)
 }
 
 func mkNav(m *menu.Node, level int) *element.Element {
-	return NAV(bs3.Navbar, bs3.Navbar_default,
+	return NAV(bs.Navbar, bs.Navbar_default,
 		DIV(
-			bs3.Container_fluid,
-			DIV(bs3.Navbar_header, SPAN(bs3.Navbar_brand, "NavBar Menu @ 0-1")),
-			menuhandler.NewStatic(m, level, bs3menu.NavBar()),
+			bs.Container_fluid,
+			DIV(bs.Navbar_header, SPAN(bs.Navbar_brand, "NavBar Menu @ 0-1")),
+			menuhandler.NewStatic(m, level, bsmenu.NavBar()),
 		),
 	)
 }
 
 func mkBreadcrumb(m *menu.Node, level int) *element.Element {
 	return DIV(
-		bs3.Container_fluid,
-		menuhandler.NewStatic(m, level, bs3menu.Breadcrumb()),
+		bs.Container_fluid,
+		menuhandler.NewStatic(m, level, bsmenu.Breadcrumb()),
 	)
 }
 
 func mkDropDownButtons(m *menu.Node) *element.Element {
-	return DIV(bs3.Btn_toolbar,
+	return DIV(bs.Btn_toolbar,
 		DIV(
-			bs3.Btn_group,
-			menuhandler.NewStaticSub(m, 0, 0, bs3menu.DropdownButton(bs3.Btn_default, "", "Category")),
-			menuhandler.NewStaticSub(m, 0, 0, bs3menu.Dropdown()),
+			bs.Btn_group,
+			menuhandler.NewStaticSub(m, 0, 0, bsmenu.DropdownButton(bs.Btn_default, "", "Category")),
+			menuhandler.NewStaticSub(m, 0, 0, bsmenu.Dropdown()),
 		),
 		DIV(
-			bs3.Btn_group,
-			menuhandler.NewStaticSub(m, 1, 1, bs3menu.Button(bs3.Btn_success, "%s", "»")),
-			menuhandler.NewStaticSub(m, 1, 1, bs3menu.DropdownButton(bs3.Btn_success, "", "")),
-			menuhandler.NewStaticSub(m, 1, 1, bs3menu.Dropdown()),
+			bs.Btn_group,
+			menuhandler.NewStaticSub(m, 1, 1, bsmenu.Button(bs.Btn_success, "%s", "»")),
+			menuhandler.NewStaticSub(m, 1, 1, bsmenu.DropdownButton(bs.Btn_success, "", "")),
+			menuhandler.NewStaticSub(m, 1, 1, bsmenu.Dropdown()),
 		),
 		DIV(
-			bs3.Btn_group,
-			menuhandler.NewStaticSub(m, 2, 2, bs3menu.Button(bs3.Btn_warning, "%s", "»")),
-			menuhandler.NewStaticSub(m, 2, 2, bs3menu.DropdownButton(bs3.Btn_warning, "", "")),
-			menuhandler.NewStaticSub(m, 2, 2, bs3menu.Dropdown()),
+			bs.Btn_group,
+			menuhandler.NewStaticSub(m, 2, 2, bsmenu.Button(bs.Btn_warning, "%s", "»")),
+			menuhandler.NewStaticSub(m, 2, 2, bsmenu.DropdownButton(bs.Btn_warning, "", "")),
+			menuhandler.NewStaticSub(m, 2, 2, bsmenu.Dropdown()),
 		),
 	)
 }
 
 func mkTabNav(m *menu.Node) http.Handler {
-	return menuhandler.NewStaticSub(m, 2, 2, bs3menu.Tabs(true, true))
+	return menuhandler.NewStaticSub(m, 2, 2, bsmenu.Tabs(true, true))
 }
 
 func mkPills(m *menu.Node) http.Handler {
-	return menuhandler.NewStaticSub(m, 1, 2, bs3menu.Pills(true, bs3.Nav_stacked))
+	return menuhandler.NewStaticSub(m, 1, 2, bsmenu.Pills(true, bs.Nav_stacked))
 }
 
 func mkListGroup(m *menu.Node) http.Handler {
-	return menuhandler.NewStaticSub(m, 2, 2, bs3menu.ListGroup())
+	return menuhandler.NewStaticSub(m, 2, 2, bsmenu.ListGroup())
 }
 
-var tabContent = DIV(bs3.Tab_content,
-	DIV(bs3.Tab_pane, types.Id("uk"),
+var tabContent = DIV(bs.Tab_content,
+	DIV(bs.Tab_pane, types.Id("uk"),
 		AHref("http://en.wikipedia.org/wiki/United_Kingdom", "From Wikipedia:"),
 		CITE(
 			`The United Kingdom of Great Britain and Northern Ireland,`+
@@ -116,7 +116,7 @@ var tabContent = DIV(bs3.Tab_content,
 				`continental Europe.`,
 		),
 	),
-	DIV(bs3.Tab_pane, types.Id("france"),
+	DIV(bs.Tab_pane, types.Id("france"),
 		AHref("http://en.wikipedia.org/wiki/France", "From Wikipedia:"),
 		CITE(
 			`France (UK: /frɑːns/; US: Listeni/fræns/; French: [fʁɑ̃s], `+
