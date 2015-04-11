@@ -84,16 +84,19 @@ func newDocument(v VERSION, attrs ...interface{}) *document {
 	}
 }
 
-func (d *document) AddToHead(v ...interface{}) {
+func (d *document) AddToHead(v ...interface{}) *document {
 	d.head = append(d.head, v...)
+	return d
 }
 
-func (d *document) AddToBody(v ...interface{}) {
+func (d *document) AddToBody(v ...interface{}) *document {
 	d.body = append(d.body, v...)
+	return d
 }
 
-func (d *document) AddToEndOfBody(v ...interface{}) {
+func (d *document) AddToEndOfBody(v ...interface{}) *document {
 	d.bodyEnd = append(d.bodyEnd, v...)
+	return d
 }
 
 func (d *document) DocType(cdnFn func(cdnURL string) string) *h.DocType {
@@ -102,5 +105,5 @@ func (d *document) DocType(cdnFn func(cdnURL string) string) *h.DocType {
 	body = append(body, d.bodyEnd...)
 	inner := append([]interface{}{}, d.attrs...)
 	inner = append(inner, h.HEAD(head...), h.BODY(body...))
-	return h.HTML5(inner...)
+	return h.HTML5(h.HTML(inner...))
 }
