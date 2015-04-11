@@ -75,6 +75,7 @@ type document struct {
 	head    []interface{}
 	body    []interface{}
 	bodyEnd []interface{}
+	theme   bool
 }
 
 func newDocument(v VERSION, attrs ...interface{}) *document {
@@ -89,6 +90,11 @@ func (d *document) AddToHead(v ...interface{}) *document {
 	return d
 }
 
+func (d *document) AddTheme() *document {
+	d.theme = true
+	return d
+}
+
 func (d *document) AddToBody(v ...interface{}) *document {
 	d.body = append(d.body, v...)
 	return d
@@ -100,7 +106,11 @@ func (d *document) AddToEndOfBody(v ...interface{}) *document {
 }
 
 func (d *document) DocType(cdnFn func(cdnURL string) string) *h.DocType {
-	head := append([]interface{}{d.VERSION.Head(cdnFn)}, d.head...)
+	head := []interface{}{d.VERSION.Head(cdnFn)}
+	if d.theme {
+		head = append(head, h.CssHref(cdnFn(d.VERSION.CSSThemeMin())))
+	}
+	head = append(head, d.head...)
 	body := append(d.body, d.VERSION.Body(cdnFn))
 	body = append(body, d.bodyEnd...)
 	inner := append([]interface{}{}, d.attrs...)
