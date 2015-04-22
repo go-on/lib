@@ -65,11 +65,11 @@ func (v VERSION) Body(cdnFn func(cdnURL string) string) *element.Element {
 	)
 }
 
-func (v VERSION) New(htmlattrs ...interface{}) *document {
-	return newDocument(v, htmlattrs...)
+func (v VERSION) New(htmlattrs ...interface{}) *Document {
+	return NewDocument(v, htmlattrs...)
 }
 
-type document struct {
+type Document struct {
 	VERSION
 	attrs   []interface{}
 	head    []interface{}
@@ -78,34 +78,34 @@ type document struct {
 	theme   bool
 }
 
-func newDocument(v VERSION, attrs ...interface{}) *document {
-	return &document{
+func NewDocument(v VERSION, attrs ...interface{}) *Document {
+	return &Document{
 		VERSION: v,
 		attrs:   attrs,
 	}
 }
 
-func (d *document) AddToHead(v ...interface{}) *document {
+func (d *Document) AddToHead(v ...interface{}) *Document {
 	d.head = append(d.head, v...)
 	return d
 }
 
-func (d *document) AddTheme() *document {
+func (d *Document) AddTheme() *Document {
 	d.theme = true
 	return d
 }
 
-func (d *document) AddToBody(v ...interface{}) *document {
+func (d *Document) AddToBody(v ...interface{}) *Document {
 	d.body = append(d.body, v...)
 	return d
 }
 
-func (d *document) AddToEndOfBody(v ...interface{}) *document {
+func (d *Document) AddToEndOfBody(v ...interface{}) *Document {
 	d.bodyEnd = append(d.bodyEnd, v...)
 	return d
 }
 
-func (d *document) DocType(cdnFn func(cdnURL string) string) *h.DocType {
+func (d *Document) DocType(cdnFn func(cdnURL string) string) *h.DocType {
 	head := []interface{}{d.VERSION.Head(cdnFn)}
 	if d.theme {
 		head = append(head, h.CssHref(cdnFn(d.VERSION.CSSThemeMin())))

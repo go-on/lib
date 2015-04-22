@@ -50,16 +50,12 @@ func mkBody(m *menu.Node) *element.Element {
 }
 
 func mkPanel(title string, body ...interface{}) *element.Element {
-	return DIV(bs.Panel, bs.Panel_default,
-		DIV(bs.Panel_heading, title),
-		DIV(bs.Panel_body, element.Elements(body...)),
-	)
+	return bscontainer.PanelDefault().AddHeader(title).AddBody(body...).Element()
 }
 
 func mkNav(m *menu.Node, level int) *element.Element {
 	return NAV(bs.Navbar, bs.Navbar_default,
-		DIV(
-			bs.Container_fluid,
+		bscontainer.Fluid(
 			DIV(bs.Navbar_header, SPAN(bs.Navbar_brand, "NavBar Menu @ 0-1")),
 			menuhandler.NewStatic(m, level, bsmenu.NavBar()),
 		),
@@ -67,8 +63,7 @@ func mkNav(m *menu.Node, level int) *element.Element {
 }
 
 func mkBreadcrumb(m *menu.Node, level int) *element.Element {
-	return DIV(
-		bs.Container_fluid,
+	return bscontainer.Fluid(
 		menuhandler.NewStatic(m, level, bsmenu.Breadcrumb()),
 	)
 }
