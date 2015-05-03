@@ -349,7 +349,7 @@ func I(objects ...interface{}) (t *Element) {
 }
 
 func IFRAME(objects ...interface{}) (t *Element) {
-	t = NewElement("iframe", SelfClosing, Invisible)
+	t = NewElement("iframe", Invisible)
 	t.Add(objects...)
 	return
 }
