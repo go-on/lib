@@ -63,7 +63,7 @@ func TestTags(t *testing.T) {
 		HR().String():            "<hr />",
 		HTML("x").String():       "<html>x</html>",
 		I("x").String():          "<i>x</i>",
-		IFRAME().String():        "<iframe />",
+		IFRAME().String():        "<iframe></iframe>",
 		IMG().String():           "<img />",
 		INPUT().String():         "<input />",
 		INS("x").String():        "<ins>x</ins>",

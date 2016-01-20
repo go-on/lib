@@ -1,6 +1,6 @@
 package html
 
-import "gopkg.in/go-on/lib.v3/types"
+import "github.com/go-on/lib/types"
 
 // entity list stolen from http://unicode.e-workers.de/entities.php
 

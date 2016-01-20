@@ -1,23 +1,24 @@
 package main
 
+/*
 import (
 	"fmt"
 
-	. "gopkg.in/go-on/lib.v3/html"
-	. "gopkg.in/go-on/lib.v3/html/internal/element"
-	"gopkg.in/go-on/lib.v3/html/internal/element/compiler"
-	. "gopkg.in/go-on/lib.v3/html/internal/htmlfat"
-	"gopkg.in/go-on/lib.v3/types"
-	"gopkg.in/go-on/router.v2"
-	. "gopkg.in/go-on/router.v2/internal/routerfat"
-	"gopkg.in/go-on/router.v2/route"
-	"gopkg.in/go-on/wrap.v2"
-	"gopkg.in/go-on/wrap-contrib-testing.v2/wrapstesting"
+	. "github.com/go-on/lib/html"
+	. "github.com/go-on/lib/html/internal/element"
+	"github.com/go-on/lib/html/internal/element/compiler"
+	. "github.com/go-on/lib/html/internal/htmlfat"
+	"github.com/go-on/lib/types"
+	"github.com/go-on/router"
+	. "github.com/go-on/router/internal/routerfat"
+	"github.com/go-on/router/route"
+	"github.com/go-on/wrap"
+	"github.com/go-on/wrap-contrib-testing/wrapstesting"
 	// . "gopkg.in/go-on/wrap-contrib.v2/wraps"
 	"net/http"
 	"sync"
 
-	"gopkg.in/go-on/lib.v3/internal/fat"
+	"github.com/go-on/lib/internal/fat"
 )
 
 type Person struct {
@@ -138,4 +139,9 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
+}
+*/
+
+func main() {
+
 }

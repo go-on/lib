@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	. "gopkg.in/go-on/lib.v3/html"
-	. "gopkg.in/go-on/lib.v3/types"
+	. "github.com/go-on/lib/html"
+	. "github.com/go-on/lib/types"
 )
 
 func path(rw http.ResponseWriter, req *http.Request) {

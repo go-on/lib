@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	. "gopkg.in/go-on/lib.v3/html"
-	"gopkg.in/go-on/lib.v3/html/internal/element/compiler"
+	. "github.com/go-on/lib/html"
+	"github.com/go-on/lib/html/internal/element/compiler"
 
 	// "gopkg.in/go-on/wrap.v2"
 	"net/http"

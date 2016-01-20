@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	. "gopkg.in/go-on/lib.v3/html"
-	. "gopkg.in/go-on/lib.v3/html/internal/element"
-	"gopkg.in/go-on/lib.v3/html/internal/match"
-	. "gopkg.in/go-on/lib.v3/types"
-	// . "gopkg.in/go-on/lib.v3/html/tag"
+
+	. "github.com/go-on/lib/html"
+	. "github.com/go-on/lib/html/element"
+	"github.com/go-on/lib/html/internal/match"
+	. "github.com/go-on/lib/types"
+	// . "github.com/go-on/lib/html/tag"
 )
 
 func main() {

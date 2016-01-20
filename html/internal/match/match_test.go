@@ -3,8 +3,8 @@ package match
 import (
 	"testing"
 
-	. "gopkg.in/go-on/lib.v3/html/internal/element"
-	"gopkg.in/go-on/lib.v3/types"
+	. "github.com/go-on/lib/html/element"
+	"github.com/go-on/lib/types"
 )
 
 func err(t *testing.T, msg string, is interface{}, shouldbe interface{}) {

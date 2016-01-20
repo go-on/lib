@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"time"
 
-	. "gopkg.in/go-on/lib.v3/html"
-	"gopkg.in/go-on/lib.v3/html/internal/element/compiler"
-	"gopkg.in/go-on/lib.v3/types"
-	"gopkg.in/go-on/lib.v3/types/placeholder"
+	. "github.com/go-on/lib/html"
+	"github.com/go-on/lib/html/element/compiler"
+	"github.com/go-on/lib/types"
+	"github.com/go-on/lib/types/placeholder"
 	"gopkg.in/metakeule/fmtdate.v1"
 )
 

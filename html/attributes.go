@@ -3,7 +3,7 @@ package html
 import (
 	"fmt"
 
-	"gopkg.in/go-on/lib.v3/types"
+	"github.com/go-on/lib/types"
 )
 
 const (

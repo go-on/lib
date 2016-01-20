@@ -1,10 +1,11 @@
 package htmlfat
 
 import (
-	. "gopkg.in/go-on/lib.v3/html"
-	"gopkg.in/go-on/lib.v3/internal/fat"
 	"strings"
 	"testing"
+
+	. "github.com/go-on/lib/html"
+	"github.com/go-on/lib/misc/fat"
 )
 
 func stripWhiteSpace(in string) string {

@@ -1,8 +1,8 @@
 package html
 
 import (
-	. "gopkg.in/go-on/lib.v3/html/internal/element"
-	"gopkg.in/go-on/lib.v3/types"
+	. "github.com/go-on/lib/html/element"
+	"github.com/go-on/lib/types"
 )
 
 func JsSrc(url string, objects ...interface{}) *Element {

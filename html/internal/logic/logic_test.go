@@ -3,7 +3,7 @@ package logic
 import (
 	"testing"
 
-	. "gopkg.in/go-on/lib.v3/html"
+	. "github.com/go-on/lib/html"
 )
 
 func TestTimes(t *testing.T) {
