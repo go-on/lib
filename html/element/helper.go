@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"gopkg.in/go-on/builtin.v1"
+	"github.com/go-on/builtin"
 	"github.com/go-on/lib/types"
 	"github.com/go-on/lib/types/placeholder"
 )

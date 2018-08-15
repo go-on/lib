@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	. "github.com/go-on/lib/html"
-	. "github.com/go-on/lib/html/internal/htmlfat"
+	. "github.com/go-on/lib/html/htmlfat"
 	"github.com/go-on/lib/misc/fat"
 )
 

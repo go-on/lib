@@ -63,7 +63,7 @@ func (ømap *map_) Scan(n string) error {
 			case float32:
 				e = t.Set(int64(vt))
 			default:
-				e = fmt.Errorf("can't convert %#v (%T) to int", v)
+				e = fmt.Errorf("can't convert %#v (%T) to int", v, v)
 			}
 		case "time":
 			e = t.Scan(v.(string))

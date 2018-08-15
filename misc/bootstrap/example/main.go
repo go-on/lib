@@ -12,7 +12,7 @@ import (
 	"github.com/go-on/lib/misc/menu"
 	"github.com/go-on/lib/misc/menu/menuhandler"
 	"github.com/go-on/lib/types"
-	"gopkg.in/go-on/cdncache.v1"
+	"github.com/go-on/cdncache"
 )
 
 func main() {

@@ -7,7 +7,7 @@ import (
 	"github.com/go-on/lib/misc/bootstrap/bs3"
 	"github.com/go-on/lib/misc/bootstrap/bs3/bs3menu"
 	"github.com/go-on/lib/types"
-	"gopkg.in/go-on/cdncache.v1"
+	"github.com/go-on/cdncache"
 	// "github.com/go-on/lib/html/h"
 	// . "github.com/go-on/lib/html/tag"
 	"net/http"

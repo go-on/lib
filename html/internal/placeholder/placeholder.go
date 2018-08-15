@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/go-on/lib/misc/replacer"
-	. "gopkg.in/go-on/builtin.v1"
+	. "github.com/go-on/builtin"
 
 	// . "github.com/go-on/lib/internal/shared"
 

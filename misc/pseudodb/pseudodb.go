@@ -21,10 +21,10 @@ import (
 
 	"github.com/go-on/lib/misc/pseudodb/pseudoroutes"
 
-	"gopkg.in/go-on/go.uuid.v1"
-	// "gopkg.in/go-on/router.v2"
-	"gopkg.in/go-on/router.v2"
-	"gopkg.in/go-on/router.v2/route"
+	"github.com/go-on/go.uuid"
+	// "github.com/go-on/router"
+	"github.com/go-on/router"
+	"github.com/go-on/router/route"
 )
 
 /*

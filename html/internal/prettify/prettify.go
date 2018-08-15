@@ -8,7 +8,7 @@ import (
 	"strings"
 	"text/scanner"
 
-	"gopkg.in/go-on/wrap.v2"
+	"github.com/go-on/wrap"
 )
 
 type xmlScanner struct {

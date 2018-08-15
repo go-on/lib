@@ -9,7 +9,7 @@ import (
 	"github.com/go-on/lib/html/element/compiler"
 	"github.com/go-on/lib/types"
 	"github.com/go-on/lib/types/placeholder"
-	"gopkg.in/metakeule/fmtdate.v1"
+	"github.com/metakeule/fmtdate"
 )
 
 var (

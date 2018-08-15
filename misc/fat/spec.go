@@ -2,7 +2,7 @@ package fat
 
 import (
 	"fmt"
-	. "gopkg.in/metakeule/nil.v1"
+	. "github.com/metakeule/nil"
 )
 
 type fieldSpec struct {

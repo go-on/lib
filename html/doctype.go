@@ -9,7 +9,7 @@ import (
 	. "github.com/go-on/lib/html/element"
 	"github.com/go-on/lib/misc/template"
 	"github.com/go-on/lib/types"
-	"gopkg.in/go-on/wrap.v2"
+	"github.com/go-on/wrap"
 )
 
 // pseudo element for placeholder

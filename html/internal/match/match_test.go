@@ -16,7 +16,7 @@ func TestPositionMatcher(t *testing.T) {
 	m := &PositionMatcher{Element: e}
 
 	if m.Matches(NewElement("a")) || m.Found {
-		t.Errorf("incorrect position matcher matches, got: %v, expected %s", true, false)
+		t.Errorf("incorrect position matcher matches, got: %v, expected %v", true, false)
 	}
 
 	_ = m.Matches(NewElement("a"))

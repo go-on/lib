@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gopkg.in/metakeule/fmtdate.v1"
+	"github.com/metakeule/fmtdate"
 	"net/http"
 	"time"
 

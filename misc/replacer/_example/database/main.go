@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"sync"
 
-	"gopkg.in/go-on/pq.v2"
+	"github.com/go-on/pq"
 )
 
 var (

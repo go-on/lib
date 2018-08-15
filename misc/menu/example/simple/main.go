@@ -12,20 +12,20 @@ import (
 func main() {
 	m := &menu.Node{
 		Edges: []*menu.Node{
-			&menu.Node{Leaf: menu.Item("B", "")},
-			&menu.Node{
+			{Leaf: menu.Item("B", "")},
+			{
 				Edges: []*menu.Node{
-					&menu.Node{Leaf: menu.Item("repl", "~replacement")},
-					&menu.Node{
+					{Leaf: menu.Item("repl", "~replacement")},
+					{
 						Edges: []*menu.Node{
-							&menu.Node{Leaf: menu.Item("AAA", "/a/a/a")},
-							&menu.Node{Leaf: menu.Item("AAB", "/a/a/b")},
+							{Leaf: menu.Item("AAA", "/a/a/a")},
+							{Leaf: menu.Item("AAB", "/a/a/b")},
 						},
 						Leaf: menu.Item("AA", "/a/a"),
 					},
-					&menu.Node{
+					{
 						Edges: []*menu.Node{
-							&menu.Node{Leaf: menu.Item("ABA", "/a/b/a")},
+							{Leaf: menu.Item("ABA", "/a/b/a")},
 						},
 						Leaf: menu.Item("AB", "$sub_a"),
 					},
@@ -45,7 +45,7 @@ func main() {
 	//m.FindByPath("~replacement").Leaf = menu.Item("/newrepl", "New Repl")
 	ul.WriterTo(m, 2, "/a/b/a").WriteTo(os.Stdout)
 
-	fmt.Println("\n#################\n")
+	fmt.Println("\n#################")
 
 	// fmt.Println(UL.Html(m, 2, "/a/a/a").String())
 	_ = fmt.Print

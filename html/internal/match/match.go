@@ -7,7 +7,7 @@ import (
 
 	. "github.com/go-on/lib/html/element"
 	"github.com/go-on/lib/types"
-	"gopkg.in/go-on/builtin.v1"
+	"github.com/go-on/builtin"
 )
 
 // something that matches an Element

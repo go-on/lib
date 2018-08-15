@@ -10,7 +10,7 @@ import (
 	"reflect"
 	"testing"
 
-	"gopkg.in/go-on/router.v2"
+	"github.com/go-on/router"
 )
 
 type person struct {
